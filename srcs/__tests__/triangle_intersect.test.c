@@ -8,8 +8,8 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 	t_ray_grid_properties	props;
 	t_camera				cam;
 
-	cam.focus = (t_vec4){0, 0, 0, 1};
-	cam.pos = (t_vec4){10, 10, 10, 1};
+	cam.focus = (t_vec4){{0, 0, 0, 1}};
+	cam.pos = (t_vec4){{10, 10, 10, 1}};
 	cam.roll = 0;
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
@@ -53,9 +53,9 @@ void							test_triangle_intersect(void)
 	t_new_object_args			args_obj;
 
 	props = get_ray_grid_props_for_test();
-	args_triangle.a = (t_vec4){3, 5, 3, 1};
-	args_triangle.u = (t_vec4){2, -4, 2};
-	args_triangle.v = (t_vec4){1, -3, -1};
+	args_triangle.a = (t_vec4){{3, 5, 3, 1}};
+	args_triangle.u = (t_vec4){{2, -4, 2}};
+	args_triangle.v = (t_vec4){{1, -3, -1}};
 	object_wrapper = new_triangle(&args_obj, &args_triangle);
 	render_triangle_intersection(&props, &object_wrapper);
 }

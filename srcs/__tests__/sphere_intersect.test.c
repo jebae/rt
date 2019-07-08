@@ -8,8 +8,8 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 	t_ray_grid_properties	props;
 	t_camera				cam;
 
-	cam.focus = (t_vec4){0, 0, 0, 1};
-	cam.pos = (t_vec4){10, 10, 10, 1};
+	cam.focus = (t_vec4){{0, 0, 0, 1}};
+	cam.pos = (t_vec4){{10, 10, 10, 1}};
 	cam.roll = 0;
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
@@ -54,7 +54,7 @@ void							test_sphere_intersect(void)
 
 	props = get_ray_grid_props_for_test();
 	args_sphere.r = 2;
-	args_sphere.c = (t_vec4){3, 3, 3, 1};
+	args_sphere.c = (t_vec4){{3, 3, 3, 1}};
 	object_wrapper = new_sphere(&args_obj, &args_sphere);
 	render_sphere_intersection(&props, &object_wrapper);
 }

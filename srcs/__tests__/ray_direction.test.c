@@ -7,8 +7,8 @@ static t_camera		get_cam(void)
 {
 	t_camera	cam;
 
-	cam.focus = (t_vec4){0, 0, 0, 1};
-	cam.pos = (t_vec4){1, 1, 1, 1};
+	cam.focus = (t_vec4){{0, 0, 0, 1}};
+	cam.pos = (t_vec4){{1, 1, 1, 1}};
 	cam.roll = 0;
 	return (cam);
 }

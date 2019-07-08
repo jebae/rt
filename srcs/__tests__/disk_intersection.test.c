@@ -8,8 +8,8 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 	t_ray_grid_properties	props;
 	t_camera				cam;
 
-	cam.focus = (t_vec4){0, 0, 0, 1};
-	cam.pos = (t_vec4){10, 10, 10, 1};
+	cam.focus = (t_vec4){{0, 0, 0, 1}};
+	cam.pos = (t_vec4){{10, 10, 10, 1}};
 	cam.roll = 0;
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
@@ -53,8 +53,8 @@ void							test_disk_intersect(void)
 
 	props = get_ray_grid_props_for_test();
 	args_disk.r = 2.0f;
-	args_disk.p = (t_vec4){3.0f, 3.0f, 3.0f};
-	args_disk.n = (t_vec4){1, 1, 4};
+	args_disk.p = (t_vec4){{3.0f, 3.0f, 3.0f}};
+	args_disk.n = (t_vec4){{1, 1, 4}};
 	object_wrapper = new_disk(&args_obj, &args_disk);
 	render_disk_intersection(&props, &object_wrapper);
 }

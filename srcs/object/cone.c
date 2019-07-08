@@ -1,5 +1,21 @@
 #include "rt.h"
 
+t_vec4					cone_normal(void *object, t_vec4 *point)
+{
+	t_cone		*cone;
+	float		k;
+	t_vec4		cp;
+	t_vec4		n;
+
+	cone = (t_cone *)object;
+	cp = vec_sub_vec(point, &(cone->c));
+	k = vec_dot_vec(&cp, &cp) / vec_dot_vec(&(cone->v), &cp);
+	n = scalar_mul_vec(k, &(cone->v));
+	n = vec_sub_vec(&cp, &n);
+	n = normalize(&n);
+	return (n);
+}
+
 static void				get_coefficients(
 	t_cone_intersect_coefficients *coeffs,
 	t_cone *cone,
@@ -18,7 +34,7 @@ static void				get_coefficients(
 	coeffs->c = ce_v * ce_v - vec_dot_vec(&ce, &ce) * cone->cos_2_theta;
 }
 
-static float				get_t(
+static float			get_t(
 	t_cone_intersect_coefficients *coeffs,
 	float det,
 	t_cone *cone,
@@ -80,7 +96,7 @@ t_object_wrapper		new_cone(
 	if (object_wrapper.object == NULL)
 		handle_memalloc_err("cone");
 	set_new_object(&object_wrapper, args_obj,
-		&cone_intersect, NULL); // add cone normal after
+		&cone_intersect, cone_normal);
 	cone = (t_cone *)object_wrapper.object;
 	cone->theta = args_cone->theta;
 	cone->cos_2_theta = pow(cos(cone->theta), 2);

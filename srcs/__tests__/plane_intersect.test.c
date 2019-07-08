@@ -8,8 +8,8 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 	t_ray_grid_properties	props;
 	t_camera				cam;
 
-	cam.focus = (t_vec4){0, 10, 10, 1};
-	cam.pos = (t_vec4){10, 10, 10, 1};
+	cam.focus = (t_vec4){{0, 10, 10, 1}};
+	cam.pos = (t_vec4){{10, 10, 10, 1}};
 	cam.roll = 0;
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
@@ -61,16 +61,16 @@ void							test_plane_intersect(void)
 
 	props = get_ray_grid_props_for_test();
 	colors[0] = 0x008800;
-	args_plane.n = (t_vec4){0, 0, 1, 1};
-	args_plane.p = (t_vec4){0, 0, 0};
+	args_plane.n = (t_vec4){{0, 0, 1, 1}};
+	args_plane.p = (t_vec4){{0, 0, 0}};
 	object_wrappers[0] = new_plane(&args_obj, &args_plane);
 	colors[1] = 0x000088;
-	args_plane.n = (t_vec4){0, 0, -1, 1};
-	args_plane.p = (t_vec4){0, 0, 20};
+	args_plane.n = (t_vec4){{0, 0, -1, 1}};
+	args_plane.p = (t_vec4){{0, 0, 20}};
 	object_wrappers[1] = new_plane(&args_obj, &args_plane);
 	colors[2] = 0x880000;
-	args_plane.n = (t_vec4){0, -1, 0, 1};
-	args_plane.p = (t_vec4){0, 20, 0};
+	args_plane.n = (t_vec4){{0, -1, 0, 1}};
+	args_plane.p = (t_vec4){{0, 20, 0}};
 	object_wrappers[2] = new_plane(&args_obj, &args_plane);
 	render_plane_intersection(&props, object_wrappers,\
 		sizeof(object_wrappers) / sizeof(t_object_wrapper), colors);

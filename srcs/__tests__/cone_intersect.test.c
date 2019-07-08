@@ -8,8 +8,8 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 	t_ray_grid_properties	props;
 	t_camera				cam;
 
-	cam.focus = (t_vec4){0, 0, 10, 1};
-	cam.pos = (t_vec4){10, 10, 10, 1};
+	cam.focus = (t_vec4){{0, 0, 10, 1}};
+	cam.pos = (t_vec4){{10, 10, 10, 1}};
 	cam.roll = 0;
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
@@ -55,8 +55,8 @@ void							test_cone_intersect(void)
 	props = get_ray_grid_props_for_test();
 	args_cone.theta = M_PI / 6.0f;
 	args_cone.h = 3.0f;
-	args_cone.c = (t_vec4){0.0f, 0.0f, 10.0f};
-	args_cone.v = (t_vec4){2.0f, 2.0f, -2.0f};
+	args_cone.c = (t_vec4){{0.0f, 0.0f, 10.0f}};
+	args_cone.v = (t_vec4){{-2.0f, -2.0f, -2.0f}};
 	object_wrapper = new_cone(&args_obj, &args_cone);
 	render_cone_intersection(&props, &object_wrapper);
 }
