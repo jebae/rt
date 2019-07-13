@@ -12,8 +12,10 @@ typedef struct				s_color
 
 typedef struct				s_ray
 {
-	t_vec4		e;
-	t_vec4		d;
+	int				type;
+	float			ior_medium;
+	t_vec4			e;
+	t_vec4			d;
 }							t_ray;
 
 typedef struct				s_ray_grid_properties
@@ -46,10 +48,13 @@ typedef struct				s_distant_light
 typedef struct				s_object_wrapper
 {
 	void		*object;
+	int			specular_alpha;
+	float		reflectivity;
+	float		transparency;
+	float		ior;
 	t_vec4		k_a;
 	t_vec4		k_d;
 	t_vec4		k_s;
-	int			shine;
 	int			(*intersect)(
 		void *object,
 		t_ray *ray,
@@ -95,5 +100,40 @@ typedef struct 				s_cone
 	t_vec4		c;
 	t_vec4		v;
 }							t_cone;
+
+typedef struct				s_cone_intersect_coefficients
+{
+	float		a;
+	float		b;
+	float		c;
+}							t_cone_intersect_coefficients;
+
+typedef struct 				s_cylinder
+{
+	float			r;
+	float			h;
+	t_vec4			c;
+	t_vec4			c_rotated;
+	t_vec4			v;
+	t_quaternion	q;
+	t_quaternion	q_i;
+	t_ray			(*rotate_ray)(struct s_cylinder *cylinder, t_ray *ray);
+}							t_cylinder;
+
+typedef struct				s_cylinder_intersect_coefficients
+{
+	float		a;
+	float		b;
+	float		c;
+}							t_cylinder_intersect_coefficients;
+
+typedef struct				s_trace_record
+{
+	t_vec4					point;
+	t_vec4					normal;
+	t_ray					*ray;
+	t_object_wrapper		*object_wrapper;
+	struct s_trace_record	*prev;
+}							t_trace_record;
 
 #endif

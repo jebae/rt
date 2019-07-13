@@ -1,6 +1,6 @@
 #include "rt.h"
 
-int		cal_color(t_vec4 rgb_ratio)
+int		rgb_to_int(t_vec4 rgb_ratio)
 {
 	int			color;
 

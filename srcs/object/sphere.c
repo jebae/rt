@@ -1,6 +1,9 @@
 #include "rt.h"
 
-static t_vec4		sphere_normal(void *object, t_vec4 *point)
+static t_vec4		sphere_normal(
+	void *object,
+	t_vec4 *point
+)
 {
 	t_vec4		n;
 
@@ -10,11 +13,13 @@ static t_vec4		sphere_normal(void *object, t_vec4 *point)
 
 static float		get_t(float d_ce, float d_d, float det)
 {
-	float		t[2];
 	int			i;
+	float		t[2];
 
-	t[0] = (-1 * d_ce - sqrt(det)) / d_d;
-	t[1] = (-1 * d_ce + sqrt(det)) / d_d;
+	t[0] = (-1.0f * d_ce - sqrtf(det)) / d_d;
+	t[1] = (-1.0f * d_ce + sqrtf(det)) / d_d;
+	if (d_d < 0.0f)
+		ft_swap(&(t[0]), &(t[1]), sizeof(float));
 	i = 0;
 	while (i < 2)
 	{
@@ -36,7 +41,7 @@ static int			sphere_intersect(
 	float		d_ce;
 	float		d_d;
 	float		det;
-	
+
 	sphere = (t_sphere *)object;
 	ce = vec_sub_vec(&(ray->e), &(sphere->c));
 	d_ce = vec_dot_vec(&(ray->d), &ce);

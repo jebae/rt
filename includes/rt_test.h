@@ -40,6 +40,10 @@ void				test_triangle_intersect(void);
 void				test_plane_intersect(void);
 void				test_disk_intersect(void);
 void				test_cone_intersect(void);
+void				test_cylinder_intersect(void);
 void				test_color(void);
+void				test_trace(void);
+void				test_reflection(void);
+void				test_refraction(void);
 
 #endif

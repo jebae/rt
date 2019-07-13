@@ -17,10 +17,13 @@ typedef struct				s_set_ray_grid_properties_args
 
 typedef struct				s_new_object_args
 {
+	int			specular_alpha;
+	float		reflectivity;
+	float		transparency;
+	float		ior;
 	t_vec4		k_a;
 	t_vec4		k_d;
 	t_vec4		k_s;
-	int			shine;
 }							t_new_object_args;
 
 typedef struct				s_new_sphere_args
@@ -57,6 +60,14 @@ typedef struct 				s_new_cone_args
 	t_vec4		v;
 }							t_new_cone_args;
 
+typedef struct 				s_new_cylinder_args
+{
+	float		r;
+	float		h;
+	t_vec4		c;
+	t_vec4		v;
+}							t_new_cylinder_args;
+
 typedef struct				s_new_light_args
 {
 	t_vec4		i_d;
@@ -68,26 +79,13 @@ typedef struct				s_new_distant_light_args
 	t_vec4		d;
 }							t_new_distant_light_args;
 
-typedef struct				s_diffuse_specular_args
+typedef struct				s_global_rt_args
 {
-	t_vec4					*ray_d;
-	t_vec4					*point;
-	t_object_wrapper		*object_wrapper;
-	t_light_wrapper			*light_wrapper;
-}							t_diffuse_specular_args;
-
-typedef struct				s_diffuse_specular_vecs
-{
-	t_vec4		n;
-	t_vec4		l;
-	t_vec4		r;
-}							t_diffuse_specular_vecs;
-
-typedef struct				s_cone_intersect_coefficients
-{
-	float		a;
-	float		b;
-	float		c;
-}							t_cone_intersect_coefficients;
+	int					num_objects;
+	int					num_lights;
+	t_vec4				*i_a;
+	t_object_wrapper	*object_wrappers;
+	t_light_wrapper		*light_wrappers;
+}							t_global_rt_args;
 
 #endif

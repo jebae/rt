@@ -1,6 +1,9 @@
 #include "rt.h"
 
-t_vec4				plane_normal(void *object, t_vec4 *point)
+t_vec4				plane_normal(
+	void *object,
+	t_vec4 *point
+)
 {
 	point = NULL;
 	return (((t_plane *)object)->n);

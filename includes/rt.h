@@ -6,8 +6,22 @@
 # include "rt_args.h"
 # include <stdio.h> // remove after
 
-# define RT_TRUE			1
-# define RT_FALSE			0
+# define RT_TRUE					1
+# define RT_FALSE					0
+# define RT_BACKGROUND_COLOR		0
+# define RT_BIAS					1e-3
+# define RT_DEPTH_LIMIT				5
+# define RT_RAY_TYPE_NONE			0
+# define RT_RAY_TYPE_REFLECTION		1
+# define RT_RAY_TYPE_REFRACTION		2
+
+typedef enum				e_rgb_shades_idx
+{
+	AMBIENT,
+	DIFFUSE,
+	REFLECT,
+	REFRACT,
+}							t_rgb_shades_idx;
 
 /*
 ** ray
@@ -18,15 +32,19 @@ t_ray_grid_properties		get_ray_grid_properties(
 	float height,
 	float aov
 );
-
 void						set_ray(
 	t_ray_grid_properties *props,
 	t_ray *ray,
 	int scalar_x,
 	int scalar_y
 );
-
-t_vec4						intersection_point(t_ray *ray, float t);
+t_vec4						hit_point(t_ray *ray, float t);
+int							trace(
+	t_ray *ray,
+	t_trace_record *prev_rec,
+	t_trace_record *rec,
+	t_global_rt_args *args
+);
 
 /*
 ** light
@@ -63,7 +81,10 @@ int							plane_intersect(
 	t_ray *ray,
 	float *t
 );
-t_vec4						plane_normal(void *object, t_vec4 *point);
+t_vec4						plane_normal(
+	void *object,
+	t_vec4 *point
+);
 t_object_wrapper			new_disk(
 	t_new_object_args *args_obj,
 	t_new_disk_args *args_disk
@@ -72,13 +93,54 @@ t_object_wrapper			new_cone(
 	t_new_object_args *args_obj,
 	t_new_cone_args *args_cone
 );
+t_object_wrapper			new_cylinder(
+	t_new_object_args *args_obj,
+	t_new_cylinder_args *args_cylinder
+);
+void						cylinder_get_coefficients(
+	t_cylinder_intersect_coefficients *coeffs,
+	t_cylinder *cylinder,
+	t_ray *ray
+);
+t_ray						cylinder_rotate_ray(t_cylinder *cylinder, t_ray *ray);
+t_ray						cylinder_stay_ray(t_cylinder *cylinder, t_ray *ray);
+t_ray						cylinder_reverse_z_ray(t_cylinder *cylinder, t_ray *ray);
 
 /*
 ** shading
 */
-int							cal_color(t_vec4 rgb_ratio);
+int							rgb_to_int(t_vec4 rgb_ratio);
 t_vec4						ambient(t_vec4 *i_a, t_vec4 *k_a);
-t_vec4						diffuse_specular(t_diffuse_specular_args *args);
+t_vec4						diffuse_specular(
+	t_vec4 *ray_d,
+	t_trace_record *rec,
+	t_light_wrapper *light_wrapper
+);
+t_vec4						ray_color(
+	t_trace_record *rec,
+	int depth,
+	t_global_rt_args *args
+);
+t_ray						get_reflect_ray(t_trace_record *rec);
+t_vec4						reflection(
+	t_trace_record *rec_origin,
+	int depth,
+	t_global_rt_args *args
+);
+t_vec4						refraction(
+	t_trace_record *rec_origin,
+	int refract_count,
+	t_global_rt_args *args
+);
+
+/*
+** shadow
+*/
+int							shadow_ray_hit(
+	t_trace_record *rec,
+	t_light_wrapper *light_wrapper,
+	t_global_rt_args *args
+);
 
 /*
 ** utils

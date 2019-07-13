@@ -1,11 +1,12 @@
 #include "rt.h"
 
-static t_vec4			disk_normal(void *object, t_vec4 *point)
+static t_vec4			disk_normal(
+	void *object,
+	t_vec4 *point
+)
 {
 	point = NULL;
-	return (plane_normal(
-		(void *)(&((t_disk *)object)->plane), point
-	));
+	return (plane_normal((void *)(&((t_disk *)object)->plane), point));
 }
 
 static int				disk_intersect(
@@ -20,7 +21,7 @@ static int				disk_intersect(
 	disk = (t_disk *)object;
 	if (plane_intersect((void *)&(disk->plane), ray, t) == RT_FALSE)
 		return (RT_FALSE);
-	v = intersection_point(ray, *t);
+	v = hit_point(ray, *t);
 	v = vec_sub_vec(&v, &(disk->plane.p));
 	if (vec_dot_vec(&v, &v) > disk->r * disk->r)
 		return (RT_FALSE);

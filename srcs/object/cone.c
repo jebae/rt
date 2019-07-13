@@ -1,6 +1,9 @@
 #include "rt.h"
 
-t_vec4					cone_normal(void *object, t_vec4 *point)
+static t_vec4			cone_normal(
+	void *object,
+	t_vec4 *point
+)
 {
 	t_cone		*cone;
 	float		k;
@@ -12,8 +15,7 @@ t_vec4					cone_normal(void *object, t_vec4 *point)
 	k = vec_dot_vec(&cp, &cp) / vec_dot_vec(&(cone->v), &cp);
 	n = scalar_mul_vec(k, &(cone->v));
 	n = vec_sub_vec(&cp, &n);
-	n = normalize(&n);
-	return (n);
+	return (normalize(&n));
 }
 
 static void				get_coefficients(
@@ -45,14 +47,16 @@ static float			get_t(
 	float		t[2];
 	t_vec4		cp;
 
-	t[0] = (-1 * coeffs->b - sqrt(det)) / coeffs->a;
-	t[1] = (-1 * coeffs->b + sqrt(det)) / coeffs->a;
+	t[0] = (-1.0f * coeffs->b - sqrtf(det)) / coeffs->a;
+	t[1] = (-1.0f * coeffs->b + sqrtf(det)) / coeffs->a;
+	if (coeffs->a < 0.0f)
+		ft_swap(&(t[0]), &(t[1]), sizeof(float));
 	i = 0;
 	while (i < 2)
 	{
-		if (t[i] > 0.0f)
+		if (t[i] >= 0.0f)
 		{
-			cp = intersection_point(ray, t[i]);
+			cp = hit_point(ray, t[i]);
 			cp = vec_sub_vec(&cp, &(cone->c));
 			det = vec_dot_vec(&cp, &(cone->v));
 			if (det >= 0.0f && det <= cone->h)

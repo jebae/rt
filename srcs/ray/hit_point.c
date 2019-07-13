@@ -1,6 +1,6 @@
 #include "rt.h"
 
-t_vec4		intersection_point(t_ray *ray, float t)
+t_vec4		hit_point(t_ray *ray, float t)
 {
 	t_vec4		point;
 

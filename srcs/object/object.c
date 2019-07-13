@@ -7,10 +7,13 @@ void		set_new_object(
 	t_vec4 (*get_normal)(void *, t_vec4 *)
 )
 {
+	object_wrapper->reflectivity = args->reflectivity;
+	object_wrapper->transparency = args->transparency;
+	object_wrapper->ior = args->ior;
 	object_wrapper->k_a = args->k_a;
 	object_wrapper->k_d = args->k_d;
 	object_wrapper->k_s = args->k_s;
-	object_wrapper->shine = args->shine;
+	object_wrapper->specular_alpha = args->specular_alpha;
 	object_wrapper->intersect = intersect;
 	object_wrapper->get_normal = get_normal;
 }

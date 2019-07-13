@@ -1,6 +1,9 @@
 #include "rt.h"
 
-static t_vec4		triangle_normal(void *object, t_vec4 *point)
+static t_vec4		triangle_normal(
+	void *object,
+	t_vec4 *point
+)
 {
 	point = NULL;
 	return (((t_triangle *)object)->n);
