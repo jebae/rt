@@ -19,6 +19,7 @@ typedef enum				e_rgb_shades_idx
 {
 	AMBIENT,
 	DIFFUSE,
+	SPECULAR,
 	REFLECT,
 	REFRACT,
 }							t_rgb_shades_idx;
@@ -111,10 +112,10 @@ t_ray						cylinder_reverse_z_ray(t_cylinder *cylinder, t_ray *ray);
 */
 int							rgb_to_int(t_vec4 rgb_ratio);
 t_vec4						ambient(t_vec4 *i_a, t_vec4 *k_a);
-t_vec4						diffuse_specular(
-	t_vec4 *ray_d,
+void						diffuse_specular(
 	t_trace_record *rec,
-	t_light_wrapper *light_wrapper
+	t_light_wrapper *light_wrapper,
+	t_vec4 *rgb_shades
 );
 t_vec4						ray_color(
 	t_trace_record *rec,

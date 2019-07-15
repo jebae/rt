@@ -7,12 +7,14 @@ int			shadow_ray_hit(
 )
 {
 	t_ray				shadow_ray;
-	t_trace_record		dumb_rec;
+	t_trace_record		rec;
 
 	shadow_ray.e = scalar_mul_vec(RT_BIAS, &(rec->normal));
 	shadow_ray.e = vec_plus_vec(&(rec->point), &(shadow_ray.e));
 	shadow_ray.d = light_wrapper->get_light_direction(
 		light_wrapper->light, &(shadow_ray.e));
 	shadow_ray.d = scalar_mul_vec(-1.0f, &(shadow_ray.d));
-	return (trace(&shadow_ray, NULL, &dumb_rec, args));
+	return (trace(&shadow_ray, NULL, &rec, args));
 }
+
+// add shadow shade vector

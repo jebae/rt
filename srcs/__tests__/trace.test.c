@@ -38,8 +38,8 @@ static t_object_wrapper		get_sphere(void)
 	t_new_sphere_args			args_sphere;
 	t_new_object_args			args_obj;
 
-	args_obj.reflectivity = 0.2f;
-	args_obj.transparency = 0.5f;
+	args_obj.reflectivity = 0.8f;
+	args_obj.transparency = 0.1f;
 	args_obj.ior = 1.5f;
 	args_obj.k_a = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
 	args_obj.k_d = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
@@ -73,8 +73,8 @@ t_object_wrapper				get_cone(void)
 	t_new_object_args			args_obj;
 
 	args_obj.specular_alpha = 50;
-	args_obj.reflectivity = 0.1f;
-	args_obj.transparency = 0.7f;
+	args_obj.reflectivity = 0.7f;
+	args_obj.transparency = 0.0f;
 	args_obj.ior = 1.5f;
 	args_obj.k_a = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
 	args_obj.k_d = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
@@ -82,7 +82,7 @@ t_object_wrapper				get_cone(void)
 	args_cone.theta = M_PI / 6.0f;
 	args_cone.h = 2.0f;
 	args_cone.c = (t_vec4){{-2.0f, 6.0f, 0.0f, 1}};
-	args_cone.v = (t_vec4){{1.0f, 1.0f, -1.0f, 1}};
+	args_cone.v = (t_vec4){{1.0f, 0.0f, -1.0f, 1}};
 	return (new_cone(&args_obj, &args_cone));
 }
 

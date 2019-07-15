@@ -116,7 +116,7 @@ static t_object_wrapper			get_plane2(void)
 	args_obj.k_d = (t_vec4){{0.3f, 0.2f, 0.4f, 1}};
 	args_obj.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
 	args_plane.n = (t_vec4){{0.0f, -1.0f, 0.0f, 1}};
-	args_plane.p = (t_vec4){{0.0f, 1000.0f, 0.0f, 1}};
+	args_plane.p = (t_vec4){{0.0f, 30.0f, 0.0f, 1}};
 	return (new_plane(&args_obj, &args_plane));
 }
 
@@ -133,7 +133,7 @@ static t_object_wrapper			get_plane3(void)
 	args_obj.k_d = (t_vec4){{0.3f, 0.6f, 0.1f, 1}};
 	args_obj.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
 	args_plane.n = (t_vec4){{-1.0f, 0.0f, 0.0f, 1}};
-	args_plane.p = (t_vec4){{100.0f, 0.0f, 0.0f, 1}};
+	args_plane.p = (t_vec4){{20.0f, 0.0f, 0.0f, 1}};
 	return (new_plane(&args_obj, &args_plane));
 }
 
