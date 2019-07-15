@@ -137,10 +137,11 @@ t_vec4						refraction(
 /*
 ** shadow
 */
-int							shadow_ray_hit(
+float						get_transmittance(
 	t_trace_record *rec,
 	t_light_wrapper *light_wrapper,
-	t_global_rt_args *args
+	t_object_wrapper *object_wrappers,
+	int num_objects
 );
 
 /*

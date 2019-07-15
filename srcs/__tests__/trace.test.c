@@ -2,8 +2,8 @@
 
 #include "rt_test.h"
 
-static float		WIDTH = 1000;
-static float		HEIGHT = 600;
+static float		WIDTH = 2000;
+static float		HEIGHT = 1000;
 static t_vec4		i_a = (t_vec4){{0.2f, 0.2f, 0.2f}};
 
 static t_ray_grid_properties	get_ray_grid_props_for_test(void)

@@ -36,16 +36,20 @@ static void			diffuse_specular_per_light(
 )
 {
 	int			i;
+	float		transmittance;
 
 	rgb_shades[DIFFUSE] = (t_vec4){{0.0f, 0.0f, 0.0f, 1.0f}};
 	rgb_shades[SPECULAR] = (t_vec4){{0.0f, 0.0f, 0.0f, 1.0f}};
-	i = -1;
-	while (++i < args->num_lights)
+	i = 0;
+	while (i < args->num_lights)
 	{
-		if (shadow_ray_hit(rec, &(args->light_wrappers[i]), args))
-			continue ;
 		diffuse_specular(
 			rec, &(args->light_wrappers[i]), rgb_shades);
+		transmittance = get_transmittance(
+			rec, &(args->light_wrappers[i]), args->object_wrappers, args->num_objects);
+		rgb_shades[DIFFUSE] = scalar_mul_vec(transmittance, &(rgb_shades[DIFFUSE]));
+		rgb_shades[SPECULAR] = scalar_mul_vec(transmittance, &(rgb_shades[SPECULAR]));
+		i++;
 	}
 }
 
