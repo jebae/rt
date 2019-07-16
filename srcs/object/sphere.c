@@ -65,7 +65,7 @@ t_object_wrapper	new_sphere(
 
 	object_wrapper.object = ft_memalloc(sizeof(t_sphere));
 	if (object_wrapper.object == NULL)
-		handle_memalloc_err("sphere");
+		exit_with_memalloc_err("sphere");
 	set_new_object(&object_wrapper, args_obj,
 		&sphere_intersect, &sphere_normal);
 	sphere = (t_sphere *)object_wrapper.object;

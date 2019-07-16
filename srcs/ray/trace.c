@@ -4,7 +4,7 @@ int				trace(
 	t_ray *ray,
 	t_trace_record *prev_rec,
 	t_trace_record *rec,
-	t_global_rt_args *args
+	t_global_settings *args
 )
 {
 	int					i;

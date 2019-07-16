@@ -89,7 +89,7 @@ static void						render_trace(
 	t_coord						p;
 	t_ray						ray;
 	t_test_dispatcher			dispatcher;
-	t_global_rt_args			args;
+	t_global_settings			args;
 	t_trace_record				rec;
 
 	init_mlx(&dispatcher, WIDTH, HEIGHT);

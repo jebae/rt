@@ -38,7 +38,7 @@ t_object_wrapper		new_disk(
 
 	object_wrapper.object = ft_memalloc(sizeof(t_disk));
 	if (object_wrapper.object == NULL)
-		handle_memalloc_err("disk");
+		exit_with_memalloc_err("disk");
 	set_new_object(&object_wrapper, args_obj,
 		&disk_intersect, &disk_normal);
 	disk = (t_disk *)object_wrapper.object;

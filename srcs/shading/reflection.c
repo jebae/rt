@@ -18,7 +18,7 @@ t_ray				get_reflect_ray(t_trace_record *rec)
 t_vec4				reflection(
 	t_trace_record *rec_origin,
 	int depth,
-	t_global_rt_args *args
+	t_global_settings *args
 )
 {
 	t_vec4					rgb;

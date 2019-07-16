@@ -108,7 +108,7 @@ t_object_wrapper		new_cylinder(
 
 	object_wrapper.object = ft_memalloc(sizeof(t_cylinder));
 	if (object_wrapper.object == NULL)
-		handle_memalloc_err("cylinder");
+		exit_with_memalloc_err("cylinder");
 	set_new_object(&object_wrapper, args_obj,
 		&cylinder_intersect, &cylinder_normal);
 	cylinder = (t_cylinder *)object_wrapper.object;

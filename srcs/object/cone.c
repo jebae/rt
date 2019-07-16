@@ -98,7 +98,7 @@ t_object_wrapper		new_cone(
 
 	object_wrapper.object = ft_memalloc(sizeof(t_cone));
 	if (object_wrapper.object == NULL)
-		handle_memalloc_err("cone");
+		exit_with_memalloc_err("cone");
 	set_new_object(&object_wrapper, args_obj,
 		&cone_intersect, cone_normal);
 	cone = (t_cone *)object_wrapper.object;

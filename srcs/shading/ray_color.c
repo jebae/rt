@@ -31,7 +31,7 @@ static t_vec4		cal_color(
 
 static void			diffuse_specular_per_light(
 	t_trace_record *rec,
-	t_global_rt_args *args,
+	t_global_settings *args,
 	t_vec4 *rgb_shades
 )
 {
@@ -56,7 +56,7 @@ static void			diffuse_specular_per_light(
 t_vec4				ray_color(
 	t_trace_record *rec,
 	int depth,
-	t_global_rt_args *args
+	t_global_settings *args
 )
 {
 	t_vec4		rgb_shades[5];

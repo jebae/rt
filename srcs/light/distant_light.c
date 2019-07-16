@@ -10,7 +10,7 @@ t_light_wrapper		new_distant_light(
 
 	light_wrapper.light = ft_memalloc(sizeof(t_distant_light));
 	if (light_wrapper.light == NULL)
-		handle_memalloc_err("distant light");
+		exit_with_memalloc_err("distant light");
 	light = light_wrapper.light;
 	light_wrapper.get_light_direction = &distant_light_direction;
 	light_wrapper.i_d = args_light->i_d;

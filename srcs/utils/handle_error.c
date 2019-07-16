@@ -1,6 +1,6 @@
 #include "rt.h"
 
-void	handle_memalloc_err(const char *msg)
+void	exit_with_memalloc_err(const char *msg)
 {
 	put_color_str(KRED, "RT : memalloc : Failed to allocate ");
 	put_color_str(KRED, msg);

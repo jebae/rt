@@ -47,6 +47,7 @@ typedef struct				s_distant_light
 
 typedef struct				s_object_wrapper
 {
+	char		type;
 	void		*object;
 	int			specular_alpha;
 	float		reflectivity;
@@ -55,15 +56,6 @@ typedef struct				s_object_wrapper
 	t_vec4		k_a;
 	t_vec4		k_d;
 	t_vec4		k_s;
-	int			(*intersect)(
-		void *object,
-		t_ray *ray,
-		float *t
-	);
-	t_vec4		(*get_normal)(
-		void *object,
-		t_vec4 *point
-	);
 }							t_object_wrapper;
 
 typedef struct				s_sphere
@@ -135,5 +127,15 @@ typedef struct				s_trace_record
 	t_object_wrapper		*object_wrapper;
 	struct s_trace_record	*prev;
 }							t_trace_record;
+
+typedef struct				s_global_settings
+{
+	float				window_width;
+	float				window_height;
+	int					num_objects;
+	int					num_lights;
+	t_object_wrapper	*object_wrappers;
+	t_light_wrapper		*light_wrappers;
+}							t_global_settings;
 
 #endif

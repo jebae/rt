@@ -40,7 +40,7 @@ t_object_wrapper	new_plane(
 
 	object_wrapper.object = ft_memalloc(sizeof(t_plane));
 	if (object_wrapper.object == NULL)
-		handle_memalloc_err("plane");
+		exit_with_memalloc_err("plane");
 	set_new_object(&object_wrapper, args_obj,
 		&plane_intersect, &plane_normal);
 	plane = (t_plane *)object_wrapper.object;

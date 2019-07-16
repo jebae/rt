@@ -48,7 +48,7 @@ t_object_wrapper	new_triangle(
 
 	object_wrapper.object = ft_memalloc(sizeof(t_triangle));
 	if (object_wrapper.object == NULL)
-		handle_memalloc_err("triangle");
+		exit_with_memalloc_err("triangle");
 	set_new_object(&object_wrapper, args_obj,
 		&triangle_intersect, &triangle_normal);
 	triangle = (t_triangle *)object_wrapper.object;

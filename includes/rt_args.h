@@ -17,6 +17,7 @@ typedef struct				s_set_ray_grid_properties_args
 
 typedef struct				s_new_object_args
 {
+	char		type;
 	int			specular_alpha;
 	float		reflectivity;
 	float		transparency;
@@ -78,14 +79,5 @@ typedef struct				s_new_distant_light_args
 {
 	t_vec4		d;
 }							t_new_distant_light_args;
-
-typedef struct				s_global_rt_args
-{
-	int					num_objects;
-	int					num_lights;
-	t_vec4				*i_a;
-	t_object_wrapper	*object_wrappers;
-	t_light_wrapper		*light_wrappers;
-}							t_global_rt_args;
 
 #endif

@@ -6,6 +6,8 @@
 # include "rt_args.h"
 # include <stdio.h> // remove after
 
+# define RT_SUCCESS					1
+# define RT_FAIL					0
 # define RT_TRUE					1
 # define RT_FALSE					0
 # define RT_BACKGROUND_COLOR		0
@@ -14,6 +16,8 @@
 # define RT_RAY_TYPE_NONE			0
 # define RT_RAY_TYPE_REFLECTION		1
 # define RT_RAY_TYPE_REFRACTION		2
+# define RT_OBJECT_TYPE_SPHERE		0
+# define RT_OBJECT_TYPE_CONE		1
 
 typedef enum				e_rgb_shades_idx
 {
@@ -44,7 +48,7 @@ int							trace(
 	t_ray *ray,
 	t_trace_record *prev_rec,
 	t_trace_record *rec,
-	t_global_rt_args *args
+	t_global_settings *args
 );
 
 /*
@@ -120,18 +124,18 @@ void						diffuse_specular(
 t_vec4						ray_color(
 	t_trace_record *rec,
 	int depth,
-	t_global_rt_args *args
+	t_global_settings *args
 );
 t_ray						get_reflect_ray(t_trace_record *rec);
 t_vec4						reflection(
 	t_trace_record *rec_origin,
 	int depth,
-	t_global_rt_args *args
+	t_global_settings *args
 );
 t_vec4						refraction(
 	t_trace_record *rec_origin,
 	int refract_count,
-	t_global_rt_args *args
+	t_global_settings *args
 );
 
 /*
@@ -147,6 +151,6 @@ float						get_transmittance(
 /*
 ** utils
 */
-void						handle_memalloc_err(const char *msg);
+void						exit_with_memalloc_err(const char *msg);
 
 #endif

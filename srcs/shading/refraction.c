@@ -56,7 +56,7 @@ static t_ray	get_refract_ray(t_trace_record *rec)
 t_vec4			refraction(
 	t_trace_record *rec_origin,
 	int refract_count,
-	t_global_rt_args *args
+	t_global_settings *args
 )
 {
 	t_vec4					rgb;
