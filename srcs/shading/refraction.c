@@ -40,7 +40,10 @@ static t_ray	get_refract_ray(t_trace_record *rec)
 	d_n = -1.0f * vec_dot_vec(&(rec->ray->d), &(rec->normal));
 	det = 1 - snell_ratio * snell_ratio * (1 - d_n * d_n);
 	if (det < 0.0f)
-		return (get_reflect_ray(rec));
+	{
+		refract_ray.type = RT_RAY_TYPE_NONE;
+		return (refract_ray);
+	}
 	v = scalar_mul_vec(snell_ratio, &(rec->ray->d));
 	refract_ray.d = scalar_mul_vec(snell_ratio * d_n - sqrtf(det), &(rec->normal));
 	refract_ray.d = vec_plus_vec(&v, &(refract_ray.d));
@@ -65,6 +68,8 @@ t_vec4			refraction(
 	if (refract_count >= RT_DEPTH_LIMIT)
 		return (rgb);
 	refract_ray = get_refract_ray(rec_origin);
+	if (refract_ray.type == RT_RAY_TYPE_NONE)
+		return (rgb);
 	if (!trace(&refract_ray, rec_origin, &rec, args))
 		return (rgb);
 	rgb_refracted = ray_color(&rec, refract_count + 1, args);

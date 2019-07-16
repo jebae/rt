@@ -84,7 +84,6 @@ static void				set_cylinder_rotate_q(t_cylinder *cylinder)
 	}
 	else if (theta <= -1.0f)
 	{
-
 		cylinder->rotate_ray = &cylinder_reverse_z_ray;
 		cylinder->c_rotated = cylinder->c;
 		cylinder->c_rotated.arr[2] = -1.0f * cylinder->c_rotated.arr[2];

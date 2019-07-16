@@ -2,8 +2,8 @@
 
 #include "rt_test.h"
 
-static float		WIDTH = 2000;
-static float		HEIGHT = 1000;
+static float		WIDTH = 1000;
+static float		HEIGHT = 800;
 static t_vec4		i_a = (t_vec4){{0.2f, 0.2f, 0.2f}};
 
 static t_ray_grid_properties	get_ray_grid_props_for_test(void)
@@ -38,8 +38,8 @@ static t_object_wrapper		get_sphere(void)
 	t_new_sphere_args			args_sphere;
 	t_new_object_args			args_obj;
 
-	args_obj.reflectivity = 0.8f;
-	args_obj.transparency = 0.1f;
+	args_obj.reflectivity = 0.1f;
+	args_obj.transparency = 0.9f;
 	args_obj.ior = 1.5f;
 	args_obj.k_a = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
 	args_obj.k_d = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
