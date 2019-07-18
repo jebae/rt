@@ -63,53 +63,24 @@ t_vec4						distant_light_direction(void *light, t_vec4 *point);
 /*
 ** object
 */
-void						set_new_object(
-	t_object_wrapper *object_wrapper,
-	t_new_object_args *args,
-	int (*intersect)(void *, t_ray *, float *),
-	t_vec4 (*get_normal)(void *, t_vec4 *)
+void						write_object(
+	char *objects_buf,
+	char *object,
+	size_t size,
+	int type
 );
-t_object_wrapper			new_sphere(
-	t_new_object_args *args_obj,
-	t_new_sphere_args *args_sphere
+
+size_t						new_sphere(
+	t_object_commons commons,
+	t_new_sphere_args *args_sphere,
+	char *objects_buf
 );
-t_object_wrapper			new_triangle(
-	t_new_object_args *args_obj,
-	t_new_triangle_args *args_triangle
+
+size_t						new_cone(
+	t_object_commons commons,
+	t_new_cone_args *args_cone,
+	char *objects_buf
 );
-t_object_wrapper			new_plane(
-	t_new_object_args *args_obj,
-	t_new_plane_args *args_plane
-);
-int							plane_intersect(
-	void *object,
-	t_ray *ray,
-	float *t
-);
-t_vec4						plane_normal(
-	void *object,
-	t_vec4 *point
-);
-t_object_wrapper			new_disk(
-	t_new_object_args *args_obj,
-	t_new_disk_args *args_disk
-);
-t_object_wrapper			new_cone(
-	t_new_object_args *args_obj,
-	t_new_cone_args *args_cone
-);
-t_object_wrapper			new_cylinder(
-	t_new_object_args *args_obj,
-	t_new_cylinder_args *args_cylinder
-);
-void						cylinder_get_coefficients(
-	t_cylinder_intersect_coefficients *coeffs,
-	t_cylinder *cylinder,
-	t_ray *ray
-);
-t_ray						cylinder_rotate_ray(t_cylinder *cylinder, t_ray *ray);
-t_ray						cylinder_stay_ray(t_cylinder *cylinder, t_ray *ray);
-t_ray						cylinder_reverse_z_ray(t_cylinder *cylinder, t_ray *ray);
 
 /*
 ** shading
@@ -141,16 +112,18 @@ t_vec4						refraction(
 /*
 ** shadow
 */
-float						get_transmittance(
-	t_trace_record *rec,
-	t_light_wrapper *light_wrapper,
-	t_object_wrapper *object_wrappers,
-	int num_objects
-);
+// float						get_transmittance(
+// 	t_trace_record *rec,
+// 	t_light_wrapper *light_wrapper,
+// 	t_object_wrapper *object_wrappers,
+// 	int num_objects
+// );
 
 /*
 ** utils
 */
 void						exit_with_memalloc_err(const char *msg);
+
+void						clear_global_settings(t_global_settings *settings);
 
 #endif

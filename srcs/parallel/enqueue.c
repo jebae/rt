@@ -28,7 +28,8 @@ int			enqueue_read_buffer(
 	args.cmd_queue = cmd_queue;
 	args.mem = mem;
 	args.offset = 0;
-	args.size = sizeof(*host_buf) * settings->window_width * settings->window_height;
+	args.size = sizeof(*host_buf) *
+		settings->window_width * settings->window_height;
 	args.host_buf = host_buf;
 	return (clk_enqueue_read_buffer(&args));
 }

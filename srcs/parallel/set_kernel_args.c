@@ -6,17 +6,20 @@ int			set_kernel_args(
 	t_global_settings *settings
 )
 {
-	if (clk_set_kernel_arg(
-		kernel, 0, sizeof(cl_mem), &(mems[RT_CL_MEM_IMAGE])) == CLKIT_FAIL)
+	if (clk_set_kernel_arg(kernel, 0, sizeof(cl_mem),
+		&(mems[RT_CL_MEM_IMAGE])) == CLKIT_FAIL)
 		return (RT_FAIL);
-	if (clk_set_kernel_arg(
-		kernel, 1, sizeof(int), settings->num_objects) == CLKIT_FAIL)
+	if (clk_set_kernel_arg(kernel, 1, sizeof(cl_mem),
+		&(mems[RT_CL_MEM_OBJECTS])) == CLKIT_FAIL)
 		return (RT_FAIL);
-	if (clk_set_kernel_arg(
-		kernel, 1, sizeof(cl_mem), &(mems[RT_CL_MEM_OBJECT_WRAPPERS])) == CLKIT_FAIL)
+	if (clk_set_kernel_arg(kernel, 2, sizeof(t_ray_grid_properties),
+		&(settings->ray_grid_props)) == CLKIT_FAIL)
 		return (RT_FAIL);
-	if (clk_set_kernel_arg(
-		kernel, 1, sizeof(cl_mem), &(mems[RT_CL_MEM_OBJECTS])) == CLKIT_FAIL)
+	if (clk_set_kernel_arg(kernel, 3, sizeof(int),
+		&(settings->num_objects)) == CLKIT_FAIL)
+		return (RT_FAIL);
+	if (clk_set_kernel_arg(kernel, 4, sizeof(int),
+		&(settings->window_width)) == CLKIT_FAIL)
 		return (RT_FAIL);
 	return (RT_SUCCESS);
 }

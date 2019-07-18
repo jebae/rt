@@ -15,18 +15,6 @@ typedef struct				s_set_ray_grid_properties_args
 	t_vec4		z;
 }							t_set_ray_grid_properties_args;
 
-typedef struct				s_new_object_args
-{
-	char		type;
-	int			specular_alpha;
-	float		reflectivity;
-	float		transparency;
-	float		ior;
-	t_vec4		k_a;
-	t_vec4		k_d;
-	t_vec4		k_s;
-}							t_new_object_args;
-
 typedef struct				s_new_sphere_args
 {
 	float		r;

@@ -19,13 +19,14 @@ static void			render_ray_direction(
 )
 {
 	t_test_dispatcher	dispatcher;
+	t_global_settings	settings;
 	t_coord				p1;
 	t_coord				p2;
 	t_mat4				mat;
 	t_ray				ray;
 
 	init_mlx(&dispatcher, WIDTH, HEIGHT);
-	init_marker(&(dispatcher.marker), dispatcher.p_mlx, dispatcher.p_win);
+	init_marker(&(dispatcher.marker), dispatcher.p_mlx, dispatcher.p_win, &settings);
 	mat = camera_mat(cam);
 	dispatcher.marker.color = 0xFFFFFF;
 	for (int i=0; i <= HEIGHT; i += 100)
