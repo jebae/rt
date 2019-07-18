@@ -9,6 +9,7 @@
 # define RT_NUM_CL_MEMS					2
 # define RT_CL_MEM_IMAGE				0
 # define RT_CL_MEM_OBJECTS				1
+# define RT_CL_MEM_LIGHTS				2
 
 int						create_buffers(
 	t_clkit *clkit,

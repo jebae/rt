@@ -10,14 +10,20 @@
 # define RT_FAIL					0
 # define RT_TRUE					1
 # define RT_FALSE					0
-# define RT_BACKGROUND_COLOR		0
+
+# define RT_BACKGROUND_COLOR		0x000000
 # define RT_BIAS					1e-3
 # define RT_DEPTH_LIMIT				5
+
 # define RT_RAY_TYPE_NONE			0
 # define RT_RAY_TYPE_REFLECTION		1
 # define RT_RAY_TYPE_REFRACTION		2
+
 # define RT_OBJECT_TYPE_SPHERE		0
 # define RT_OBJECT_TYPE_CONE		1
+# define RT_OBJECT_TYPE_PLANE		2
+
+# define RT_LIGHT_TYPE_DISTANT		0
 
 typedef enum				e_rgb_shades_idx
 {
@@ -44,28 +50,24 @@ void						set_ray(
 	int scalar_y
 );
 t_vec4						hit_point(t_ray *ray, float t);
-int							trace(
-	t_ray *ray,
-	t_trace_record *prev_rec,
-	t_trace_record *rec,
-	t_global_settings *args
-);
 
 /*
 ** light
 */
-t_light_wrapper				new_distant_light(
-	t_new_light_args *args_light,
-	t_new_distant_light_args *args_distant
+size_t						new_distant_light(
+	t_light_commons commons,
+	t_new_distant_light_args *args_light,
+	char *lights_buf
 );
+
 t_vec4						distant_light_direction(void *light, t_vec4 *point);
 
 /*
 ** object
 */
-void						write_object(
-	char *objects_buf,
-	char *object,
+void						write_mem_buf(
+	char *buf,
+	char *content,
 	size_t size,
 	int type
 );
@@ -82,32 +84,38 @@ size_t						new_cone(
 	char *objects_buf
 );
 
+size_t						new_plane(
+	t_object_commons commons,
+	t_new_plane_args *args_plane,
+	char *objects_buf
+);
+
 /*
 ** shading
 */
 int							rgb_to_int(t_vec4 rgb_ratio);
 t_vec4						ambient(t_vec4 *i_a, t_vec4 *k_a);
-void						diffuse_specular(
-	t_trace_record *rec,
-	t_light_wrapper *light_wrapper,
-	t_vec4 *rgb_shades
-);
-t_vec4						ray_color(
-	t_trace_record *rec,
-	int depth,
-	t_global_settings *args
-);
-t_ray						get_reflect_ray(t_trace_record *rec);
-t_vec4						reflection(
-	t_trace_record *rec_origin,
-	int depth,
-	t_global_settings *args
-);
-t_vec4						refraction(
-	t_trace_record *rec_origin,
-	int refract_count,
-	t_global_settings *args
-);
+// void						diffuse_specular(
+// 	t_trace_record *rec,
+// 	// t_light_wrapper *light_wrapper,
+// 	t_vec4 *rgb_shades
+// );
+// t_vec4						ray_color(
+// 	t_trace_record *rec,
+// 	int depth,
+// 	t_global_settings *args
+// );
+// t_ray						get_reflect_ray(t_trace_record *rec);
+// t_vec4						reflection(
+// 	t_trace_record *rec_origin,
+// 	int depth,
+// 	t_global_settings *args
+// );
+// t_vec4						refraction(
+// 	t_trace_record *rec_origin,
+// 	int refract_count,
+// 	t_global_settings *args
+// );
 
 /*
 ** shadow

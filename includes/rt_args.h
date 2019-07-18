@@ -57,12 +57,6 @@ typedef struct 				s_new_cylinder_args
 	t_vec4		v;
 }							t_new_cylinder_args;
 
-typedef struct				s_new_light_args
-{
-	t_vec4		i_d;
-	t_vec4		i_s;
-}							t_new_light_args;
-
 typedef struct				s_new_distant_light_args
 {
 	t_vec4		d;

@@ -23,17 +23,17 @@ int			sphere_intersect(
 	float *t
 )
 {
-	t_sphere	*sphere;
+	t_sphere	sphere;
 	t_vec4		ce;
 	float		d_ce;
 	float		d_d;
 	float		det;
 
-	sphere = (t_sphere *)objects_buf;
-	ce = vec_sub_vec(&(ray->e), &(sphere->c));
+	sphere = *(__global t_sphere *)objects_buf;
+	ce = vec_sub_vec(&(ray->e), &(sphere.c));
 	d_ce = vec_dot_vec(&(ray->d), &ce);
 	d_d = vec_dot_vec(&(ray->d), &(ray->d));
-	det = d_ce * d_ce - d_d * (vec_dot_vec(&ce, &ce) - sphere->r * sphere->r);
+	det = d_ce * d_ce - d_d * (vec_dot_vec(&ce, &ce) - sphere.r * sphere.r);
 	if (det < 0.0f)
 		return (RT_FALSE);
 	*t = get_sphere_t(d_ce, d_d, det);
@@ -48,9 +48,9 @@ t_vec4		sphere_normal(
 )
 {
 	t_vec4		n;
-	t_sphere	*sphere;
+	t_sphere	sphere;
 
-	sphere = (t_sphere *)objects_buf;
-	n = vec_sub_vec(point, &(sphere->c));
+	sphere = *(__global t_sphere *)objects_buf;
+	n = vec_sub_vec(point, &(sphere.c));
 	return (normalize_vec(&n));
 }

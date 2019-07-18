@@ -1,5 +1,3 @@
-#include "rt.h"
-
 t_vec4		ambient(t_vec4 *i_a, t_vec4 *k_a)
 {
 	int			i;

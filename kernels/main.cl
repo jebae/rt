@@ -1,8 +1,10 @@
 __kernel void		ray_trace(
 	__global int *out,
 	__global char *objects_buf,
+	__global char *lights_buf,
 	t_ray_grid_properties ray_grid_props,
 	int num_objects,
+	int num_lights,
 	int width
 )
 {

@@ -22,10 +22,10 @@ int				trace(
 	objects_ptr = settings->objects_buf;
 	stride = 0;
 	i = -1;
-	while (++i < settings->num_objects)
+	while (++i < settings->num_objects && (objects_ptr += stride))
 	{
-		objects_ptr += stride;
-		if (!intersect(objects_ptr, &ray, &(t[0]), &stride))
+		stride = get_object_stride(objects_ptr);
+		if (!intersect(objects_ptr, &ray, &(t[0])))
 			continue ;
 		if (t[0] > t[1])
 			continue ;

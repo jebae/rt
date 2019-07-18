@@ -43,7 +43,8 @@ char        		*get_img_buffer(void *p_img, int width);
 ** tests
 */
 void				test_ray_direction(void);
-void				test_sphere_intersect(void);
+void				test_cl_intersect(void);
+void				test_cl_color(void);
 
 
 #endif
