@@ -9,9 +9,9 @@
 #define RT_FALSE						0
 #define RT_BACKGROUND_COLOR				0x000000
 
-# define RT_RAY_TYPE_NONE				0
-# define RT_RAY_TYPE_REFLECTION			1
-# define RT_RAY_TYPE_REFRACTION			2
+#define RT_RAY_TYPE_NONE				0
+#define RT_RAY_TYPE_REFLECTION			1
+#define RT_RAY_TYPE_REFRACTION			2
 
 #define RT_OBJECT_TYPE_SPHERE			0
 #define RT_OBJECT_TYPE_CONE				1
@@ -101,6 +101,7 @@ typedef struct				s_plane
 typedef struct				s_trace_record
 {
 	float					coeff;
+	int						depth;
 	t_vec4					point;
 	t_vec4					normal;
 	t_ray					ray;
@@ -203,11 +204,17 @@ size_t								get_light_stride(__global char *buf);
 */
 size_t								get_object_stride(__global char *buf);
 
+t_object_commons					get_object_commons(__global char *buf);
+
 int									intersect(
 	__global char *objects_buf,
 	t_ray *ray,
 	float *t
 );
+
+float								get_transparency(__global char *objects_buf);
+
+float								get_object_ior(__global char *objects_buf);
 
 t_vec4								get_normal(
 	__global char *objects_buf,
@@ -271,7 +278,7 @@ void								push_rec_queue(
 	t_trace_record_queue *rec_queue,
 	t_trace_record rec
 );
-t_trace_record						pop_rec_queue(t_trace_record_queue *rec_queue);
+t_trace_record						*pop_rec_queue(t_trace_record_queue *rec_queue);
 
 /*
 ** shade
@@ -315,6 +322,22 @@ t_vec4								ambient(t_vec4 *i_a, t_vec4 *k_a);
 
 t_ray								get_reflect_ray(t_trace_record *rec);
 
+int									reflect_record(
+	t_trace_record *prev,
+	t_trace_record *cur,
+	t_global_settings *settings
+);
+
+float								get_ior(t_trace_record *rec);
+
+t_ray								get_refract_ray(t_trace_record *rec);
+
+int									refract_record(
+	t_trace_record *prev,
+	t_trace_record *cur,
+	t_global_settings *settings
+);
+
 /*
 ** shadow
 */
@@ -322,8 +345,6 @@ t_ray								get_shadow_ray(
 	t_trace_record *rec,
 	__global char *lights_buf
 );
-
-float								get_transparency(__global char *objects_buf);
 
 float								get_transmittance(
 	t_trace_record *rec,

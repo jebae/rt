@@ -13,5 +13,22 @@ t_ray				get_reflect_ray(t_trace_record *rec)
 	return (reflect_ray);
 }
 
-// function about reflect record
-t_trace_record		reflect_record(float coeff, )
+int					reflect_record(
+	t_trace_record *prev,
+	t_trace_record *cur,
+	t_global_settings *settings
+)
+{
+	t_ray				ray;
+	t_object_commons	commons;
+
+	ray = get_reflect_ray(prev);
+	if (trace(ray, prev, cur, settings))
+	{
+		commons = get_object_commons(prev->objects_buf);
+		cur->coeff = prev->coeff * commons.reflectivity;
+		cur->depth = prev->depth + 1;
+		return (RT_TRUE);
+	}
+	return (RT_FALSE);
+}

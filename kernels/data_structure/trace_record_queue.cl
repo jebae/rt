@@ -29,11 +29,11 @@ void				push_rec_queue(
 	rec_queue->count += 1;
 }
 
-t_trace_record		pop_rec_queue(t_trace_record_queue *rec_queue)
+t_trace_record		*pop_rec_queue(t_trace_record_queue *rec_queue)
 {
-	t_trace_record		poped;
+	t_trace_record		*poped;
 
-	poped = rec_queue->queue[rec_queue->front];
+	poped = &(rec_queue->queue[rec_queue->front]);
 	rec_queue->front += 1;
 	if (rec_queue->front == RT_MAX_RECORD)
 		rec_queue->front = 0;

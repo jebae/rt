@@ -12,15 +12,6 @@ t_ray				get_shadow_ray(
 	return (shadow_ray);
 }
 
-float				get_transparency(__global char *objects_buf)
-{
-	t_object_commons	commons;
-
-	commons = *(__global t_object_commons *)(objects_buf + sizeof(int));
-	return (commons.transparency);
-}
-
-
 float				get_transmittance(
 	t_trace_record *rec,
 	__global char *lights_buf,

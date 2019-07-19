@@ -23,8 +23,8 @@ static size_t		get_sphere(char *objects_buf)
 	t_object_commons			commons;
 
 	commons.specular_alpha = 5;
-	commons.reflectivity = 0.1f;
-	commons.transparency = 0.1f;
+	commons.reflectivity = 0.0f;
+	commons.transparency = 0.9f;
 	commons.ior = 1.5f;
 	commons.k_a = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
 	commons.k_d = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
@@ -40,8 +40,8 @@ static size_t		get_cone(char *objects_buf)
 	t_object_commons			commons;
 
 	commons.specular_alpha = 5;
-	commons.reflectivity = 0.1f;
-	commons.transparency = 0.1f;
+	commons.reflectivity = 0.0f;
+	commons.transparency = 0.0f;
 	commons.ior = 1.5f;
 	commons.k_a = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
 	commons.k_d = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
@@ -109,6 +109,7 @@ void						test_cl_color(void)
 		"kernels/object/cone.cl",
 		"kernels/object/get_normal.cl",
 		"kernels/object/get_object_stride.cl",
+		"kernels/object/get_object_commons.cl",
 		"kernels/object/intersect.cl",
 		"kernels/object/plane.cl",
 		"kernels/object/sphere.cl",
@@ -120,6 +121,8 @@ void						test_cl_color(void)
 		"kernels/shade/color.cl",
 		"kernels/shade/diffuse_specular.cl",
 		"kernels/shade/ray_color.cl",
+		"kernels/shade/reflection.cl",
+		"kernels/shade/refraction.cl",
 		"kernels/shadow/shadow.cl",
 		"kernels/utils/swap.cl",
 		"kernels/__tests__/color.test.cl"

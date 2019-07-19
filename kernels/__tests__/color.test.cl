@@ -22,6 +22,7 @@ __kernel void		color_test(
 	{
 		init_rec_queue(&rec_queue);
 		rec.coeff = 1.0f;
+		rec.depth = 0;
 		push_rec_queue(&rec_queue, rec);
 		out[idx] = ray_trace(&rec_queue, &settings);
 		return ;

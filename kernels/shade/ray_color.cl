@@ -15,7 +15,7 @@ t_vec4		ray_color(
 	t_vec4					a;
 	t_vec4					ds;
 
-	commons = *(__global t_object_commons *)(rec->objects_buf + sizeof(int));
+	commons = get_object_commons(rec->objects_buf);
 	a = ambient(&(settings->i_a), &(commons.k_a));
 	ds = diffuse_specular_per_light(rec, &commons, settings);
 	return (vec_plus_vec(&a, &ds));
@@ -28,17 +28,22 @@ int			ray_trace(
 {
 	t_vec4				rgb;
 	t_vec4				shade;
-	t_trace_record		rec;
+	t_trace_record		*rec;
+	t_trace_record		new_rec;
 
 	init_rgb_color(&rgb);
 	while (!is_rec_queue_empty(rec_queue))
 	{
-		// pop -> push reflect and refract
 		rec = pop_rec_queue(rec_queue);
-		shade = ray_color(&rec, settings);
-		shade = scalar_mul_vec(rec.coeff, &shade);
+		shade = ray_color(rec, settings);
+		shade = scalar_mul_vec(rec->coeff, &shade);
 		rgb = vec_plus_vec(&rgb, &shade);
-		// calculate rgb from current surface -> sum
+		if (rec->depth >= RT_MAX_DEPTH)
+			continue ;
+		if (reflect_record(rec, &new_rec, settings))
+			push_rec_queue(rec_queue, new_rec);
+		if (refract_record(rec, &new_rec, settings))
+			push_rec_queue(rec_queue, new_rec);
 	}
 	return (rgb_to_int(&rgb));
 }
