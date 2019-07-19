@@ -22,6 +22,7 @@
 # define RT_OBJECT_TYPE_SPHERE		0
 # define RT_OBJECT_TYPE_CONE		1
 # define RT_OBJECT_TYPE_PLANE		2
+# define RT_OBJECT_TYPE_TRIANGLE	3
 
 # define RT_LIGHT_TYPE_DISTANT		0
 
@@ -87,6 +88,12 @@ size_t						new_cone(
 size_t						new_plane(
 	t_object_commons commons,
 	t_new_plane_args *args_plane,
+	char *objects_buf
+);
+
+size_t						new_triangle(
+	t_object_commons commons,
+	t_new_triangle_args *args_triangle,
 	char *objects_buf
 );
 

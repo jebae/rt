@@ -3,7 +3,7 @@
 
 static float		WIDTH = 1000;
 static float		HEIGHT = 800;
-static t_vec4		i_a = (t_vec4){{0.2f, 0.2f, 0.2f, 1.0f}};
+static t_vec4		i_a = (t_vec4){{0.05f, 0.05f, 0.05f, 1.0f}};
 
 static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 {
@@ -22,9 +22,9 @@ static size_t		get_sphere(char *objects_buf)
 	t_new_sphere_args			args_sphere;
 	t_object_commons			commons;
 
-	commons.specular_alpha = 5;
-	commons.reflectivity = 0.0f;
-	commons.transparency = 0.9f;
+	commons.specular_alpha = 50;
+	commons.reflectivity = 0.2f;
+	commons.transparency = 0.0f;
 	commons.ior = 1.5f;
 	commons.k_a = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
 	commons.k_d = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
@@ -40,8 +40,8 @@ static size_t		get_cone(char *objects_buf)
 	t_object_commons			commons;
 
 	commons.specular_alpha = 5;
-	commons.reflectivity = 0.0f;
-	commons.transparency = 0.0f;
+	commons.reflectivity = 0.3f;
+	commons.transparency = 0.3f;
 	commons.ior = 1.5f;
 	commons.k_a = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
 	commons.k_d = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
@@ -58,16 +58,34 @@ static size_t		get_plane(char *objects_buf)
 	t_new_plane_args			args_plane;
 	t_object_commons			commons;
 
-	commons.reflectivity = 0.0f;
-	commons.transparency = 0.0f;
+	commons.reflectivity = 0.5f;
+	commons.transparency = 0.5f;
 	commons.ior = 1.5;
 	commons.k_a = (t_vec4){{1.0f, 1.0f, 1.0f, 1}};
 	commons.k_d = (t_vec4){{1.0f, 1.0f, 1.0f, 1}};
 	commons.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
-	commons.specular_alpha = 5;
+	commons.specular_alpha = 50;
 	args_plane.n = (t_vec4){{0.0f, 0.0f, 1.0f, 1}};
 	args_plane.p = (t_vec4){{0.0f, 0.0f, -1.0f, 1}};
 	return (new_plane(commons, &args_plane, objects_buf));
+}
+
+static size_t		get_triangle(char *objects_buf)
+{
+	t_new_triangle_args			args_triangle;
+	t_object_commons			commons;
+
+	commons.ior = 1.5f;
+	commons.specular_alpha = 5;
+	commons.reflectivity = 0.0f;
+	commons.transparency = 0.3f;
+	commons.k_a = (t_vec4){{0.1f, 0.6f, 0.9f, 1}};
+	commons.k_d = (t_vec4){{0.1f, 0.6f, 0.9f, 1}};
+	commons.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
+	args_triangle.a = (t_vec4){{0.0f, 3.0f, 1.0f, 1.0f}};
+	args_triangle.u = (t_vec4){{1.0f, 0.0f, 1.0f, 1.0f}};
+	args_triangle.v = (t_vec4){{2.0f, 0.0f, 1.0f, 1.0f}};
+	return (new_triangle(commons, &args_triangle, objects_buf));
 }
 
 static size_t		get_distant_light(char *lights_buf)
@@ -86,6 +104,7 @@ static void			write_objects(char *objects_buf)
 	objects_buf += get_sphere(objects_buf);
 	objects_buf += get_cone(objects_buf);
 	objects_buf += get_plane(objects_buf);
+	objects_buf += get_triangle(objects_buf);
 }
 
 static void			write_lights(char *lights_buf)
@@ -103,6 +122,7 @@ void						test_cl_color(void)
 		"kernels/header.cl",
 		"kernels/data_structure/trace_record_queue.cl",
 		"kernels/gmath/vec4/vec4_operator.cl",
+		"kernels/gmath/mat4/mat4_operator.cl",
 		"kernels/light/distant_light.cl",
 		"kernels/light/get_light_direction.cl",
 		"kernels/light/get_light_stride.cl",
@@ -113,6 +133,7 @@ void						test_cl_color(void)
 		"kernels/object/intersect.cl",
 		"kernels/object/plane.cl",
 		"kernels/object/sphere.cl",
+		"kernels/object/triangle.cl",
 		"kernels/preprocess/get_global_settings.cl",
 		"kernels/ray/hit_point.cl",
 		"kernels/ray/ray_origin.cl",
@@ -140,8 +161,9 @@ void						test_cl_color(void)
 	settings.img_buf = (int *)get_img_buffer(
 		dispatcher.marker.p_img, settings.window_width);
 
-	settings.num_objects = 3;
+	settings.num_objects = 4;
 	buf_size = sizeof(t_sphere) + sizeof(t_cone) + sizeof(t_plane) +
+		sizeof(t_triangle) +
 		sizeof(int) * settings.num_objects;
 	settings.objects_buf_size = buf_size;
 	settings.objects_buf = (char *)ft_memalloc(buf_size);

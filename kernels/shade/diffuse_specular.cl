@@ -23,6 +23,12 @@ t_vec4				specular(
 	float		r_v;
 	t_vec4		res;
 
+	// i = -1;
+	// while (++i < 3)
+	// 	res.arr[i] = 0.0f;
+	// res.arr[3] = 1.0f;
+	// if (ray->type != RT_RAY_TYPE_NONE)
+	// 	return (res);
 	r_v = -1.0f * vec_dot_vec(r, &(ray->d));
 	r_v = MAX(0.0f, r_v);
 	r_v = pow(r_v, obj_commons->specular_alpha);

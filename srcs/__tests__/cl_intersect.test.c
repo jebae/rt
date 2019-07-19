@@ -42,6 +42,18 @@ static size_t		get_cone(char *objects_buf)
 	return (new_cone(commons, &args_cone, objects_buf));
 }
 
+static size_t		get_triangle(char *objects_buf)
+{
+	t_new_triangle_args			args_triangle;
+	t_object_commons			commons;
+
+	commons.ior = 4.2f;
+	args_triangle.a = (t_vec4){{3, 5, 3, 1}};
+	args_triangle.u = (t_vec4){{2, -4, 2}};
+	args_triangle.v = (t_vec4){{1, -3, -1}};
+	return (new_triangle(commons, &args_triangle, objects_buf));
+}
+
 static size_t		get_distant_light(char *lights_buf)
 {
 	t_new_distant_light_args	args_light;
@@ -56,6 +68,7 @@ static void			write_objects(char *objects_buf)
 {
 	objects_buf += get_sphere(objects_buf);
 	objects_buf += get_cone(objects_buf);
+	objects_buf += get_triangle(objects_buf);
 }
 
 static void			write_lights(char *lights_buf)
@@ -72,6 +85,7 @@ void						test_cl_intersect(void)
 	static char			*srcs[] = {
 		"kernels/header.cl",
 		"kernels/gmath/vec4/vec4_operator.cl",
+		"kernels/gmath/mat4/mat4_operator.cl",
 		"kernels/preprocess/get_global_settings.cl",
 		"kernels/object/get_object_stride.cl",
 		"kernels/object/get_normal.cl",
@@ -79,6 +93,7 @@ void						test_cl_intersect(void)
 		"kernels/object/sphere.cl",
 		"kernels/object/cone.cl",
 		"kernels/object/plane.cl",
+		"kernels/object/triangle.cl",
 		"kernels/ray/hit_point.cl",
 		"kernels/ray/ray_origin.cl",
 		"kernels/ray/trace.cl",
@@ -98,8 +113,9 @@ void						test_cl_intersect(void)
 	settings.img_buf = (int *)get_img_buffer(
 		dispatcher.marker.p_img, settings.window_width);
 
-	settings.num_objects = 2;
-	buf_size = sizeof(t_cone) + sizeof(t_sphere) + sizeof(int) * settings.num_objects;
+	settings.num_objects = 3;
+	buf_size = sizeof(t_cone) + sizeof(t_sphere) + sizeof(t_triangle) +
+		sizeof(int) * settings.num_objects;
 	settings.objects_buf_size = buf_size;
 	settings.objects_buf = (char *)ft_memalloc(buf_size);
 	write_objects(settings.objects_buf);

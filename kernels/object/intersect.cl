@@ -15,5 +15,7 @@ int			intersect(
 		res = cone_intersect(objects_buf + sizeof(int), ray, t);
 	else if (type == RT_OBJECT_TYPE_PLANE)
 		res = plane_intersect(objects_buf + sizeof(int), ray, t);
+	else if (type == RT_OBJECT_TYPE_TRIANGLE)
+		res = triangle_intersect(objects_buf + sizeof(int), ray, t);
 	return (res);
 }

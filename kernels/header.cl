@@ -16,6 +16,7 @@
 #define RT_OBJECT_TYPE_SPHERE			0
 #define RT_OBJECT_TYPE_CONE				1
 #define RT_OBJECT_TYPE_PLANE			2
+#define RT_OBJECT_TYPE_TRIANGLE			3
 
 #define RT_LIGHT_TYPE_DISTANT			0
 
@@ -27,6 +28,19 @@ typedef struct			s_vec4
 {
 	float				arr[4];
 }						t_vec4;
+
+typedef struct			s_mat4
+{
+	float				arr[4][4];
+}						t_mat4;
+
+typedef struct			s_quaternion
+{
+	float				x;
+	float				y;
+	float				z;
+	float				w;
+}						t_quaternion;
 
 typedef struct				s_ray_grid_properties
 {
@@ -98,6 +112,15 @@ typedef struct				s_plane
 	t_vec4				n;
 }							t_plane;
 
+typedef struct				s_triangle
+{
+	t_object_commons	commons;
+	t_vec4				a;
+	t_vec4				u;
+	t_vec4				v;
+	t_vec4				n;
+}							t_triangle;
+
 typedef struct				s_trace_record
 {
 	float					coeff;
@@ -152,6 +175,16 @@ t_vec4						vec_cross_vec(t_vec4 *v1, t_vec4 *v2);
 float						vec_norm(t_vec4 *v);
 t_vec4						normalize_vec(t_vec4 *v);
 t_vec4						vec_sub_vec(t_vec4 *v1, t_vec4 *v2);
+void						vec_to_mat_row(t_vec4 *vec, t_mat4 *mat, int idx);
+t_vec4						mat_mul_vec(t_mat4 *m, t_vec4 *v);
+t_mat4						mat_mul_mat(t_mat4 *m1, t_mat4 *m2);
+t_mat4						mat_transpose(t_mat4 *mat);
+float						mat3_det(t_mat4 *mat);
+t_vec4						mat3_cramer_solution(
+	t_mat4 *a,
+	t_vec4 *b,
+	int *solution_found
+);
 
 /*
 ** preprocess
@@ -243,6 +276,17 @@ int									cone_intersect(
 	__global char *objects_buf,
 	t_ray *ray,
 	float *t
+);
+
+int									triangle_intersect(
+	__global char *objects_buf,
+	t_ray *ray,
+	float *t
+);
+
+t_vec4								triangle_normal(
+	__global char *objects_buf,
+	t_vec4 *point
 );
 
 t_cone_intersect_coefficients		get_cone_intersect_coefficients(

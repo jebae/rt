@@ -38,23 +38,21 @@
 // 	return (RT_FALSE);
 // }
 
-t_object_wrapper	new_triangle(
-	t_new_object_args *args_obj,
-	t_new_triangle_args *args_triangle
+size_t		new_triangle(
+	t_object_commons commons,
+	t_new_triangle_args *args_triangle,
+	char *objects_buf
 )
 {
-	t_object_wrapper	object_wrapper;
-	t_triangle			*triangle;
+	t_triangle			triangle;
 
-	object_wrapper.object = ft_memalloc(sizeof(t_triangle));
-	if (object_wrapper.object == NULL)
-		exit_with_memalloc_err("triangle");
-	set_new_object(&object_wrapper, args_obj);
-	triangle = (t_triangle *)object_wrapper.object;
-	triangle->a = args_triangle->a;
-	triangle->u = args_triangle->u;
-	triangle->v = args_triangle->v;
-	triangle->n = vec_cross_vec(&(triangle->u), &(triangle->v));
-	triangle->n = normalize(&(triangle->n));
-	return (object_wrapper);
+	triangle.commons = commons;
+	triangle.a = args_triangle->a;
+	triangle.u = args_triangle->u;
+	triangle.v = args_triangle->v;
+	triangle.n = vec_cross_vec(&(triangle.u), &(triangle.v));
+	triangle.n = normalize(&(triangle.n));
+	write_mem_buf(objects_buf,
+		(char *)&triangle, sizeof(triangle), RT_OBJECT_TYPE_TRIANGLE);
+	return (sizeof(triangle) + sizeof(int));
 }
