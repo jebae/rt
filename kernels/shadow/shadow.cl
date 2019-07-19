@@ -12,6 +12,15 @@ t_ray				get_shadow_ray(
 	return (shadow_ray);
 }
 
+float				get_transparency(__global char *objects_buf)
+{
+	t_object_commons	commons;
+
+	commons = *(__global t_object_commons *)(objects_buf + sizeof(int));
+	return (commons.transparency);
+}
+
+
 float				get_transmittance(
 	t_trace_record *rec,
 	__global char *lights_buf,
@@ -24,7 +33,6 @@ float				get_transmittance(
 	float				transmittance;
 	size_t				stride;
 	t_ray				shadow_ray;
-	t_object_commons	commons;
 
 	transmittance = 1.0f;
 	shadow_ray = get_shadow_ray(rec, lights_buf);
@@ -34,10 +42,7 @@ float				get_transmittance(
 	{
 		stride = get_object_stride(objects_buf);
 		if (intersect(objects_buf, &shadow_ray, &t))
-		{
-			commons = *(__global t_object_commons *)(objects_buf + sizeof(int));
-			transmittance *= commons.transparency;
-		}
+			transmittance *= get_transparency(objects_buf);
 	}
 	return (transmittance);
 }

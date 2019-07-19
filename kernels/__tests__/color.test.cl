@@ -2,11 +2,7 @@ __kernel void		color_test(
 	__global int *out,
 	__global char *objects_buf,
 	__global char *lights_buf,
-	t_ray_grid_properties ray_grid_props,
-	int num_objects,
-	int num_lights,
-	t_vec4 i_a,
-	int width
+	t_global_settings_args settings_args
 )
 {
 	int						idx = get_global_id(0);
@@ -16,11 +12,16 @@ __kernel void		color_test(
 	t_trace_record_queue	rec_queue;
 
 	settings = get_global_settings(objects_buf, lights_buf,
-		num_objects, num_lights, i_a);
-	ray = ray_origin(&ray_grid_props, idx % width, idx / width);
+		settings_args.num_objects, settings_args.num_lights, settings_args.i_a);
+	ray = ray_origin(
+		&(settings_args.ray_grid_props),
+		idx % settings_args.window_width, idx / settings_args.window_width);
+	// this ior can be decided with location of camera (but simply in air -> 1.0f)
+	ray.ior_medium = 1.0f;
 	if (trace(ray, NULL, &rec, &settings))
 	{
 		init_rec_queue(&rec_queue);
+		rec.coeff = 1.0f;
 		push_rec_queue(&rec_queue, rec);
 		out[idx] = ray_trace(&rec_queue, &settings);
 		return ;

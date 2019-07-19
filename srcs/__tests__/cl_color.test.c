@@ -22,7 +22,7 @@ static size_t		get_sphere(char *objects_buf)
 	t_new_sphere_args			args_sphere;
 	t_object_commons			commons;
 
-	commons.specular_alpha = 3;
+	commons.specular_alpha = 5;
 	commons.reflectivity = 0.1f;
 	commons.transparency = 0.1f;
 	commons.ior = 1.5f;
@@ -39,7 +39,7 @@ static size_t		get_cone(char *objects_buf)
 	t_new_cone_args				args_cone;
 	t_object_commons			commons;
 
-	commons.specular_alpha = 3;
+	commons.specular_alpha = 5;
 	commons.reflectivity = 0.1f;
 	commons.transparency = 0.1f;
 	commons.ior = 1.5f;
@@ -48,8 +48,8 @@ static size_t		get_cone(char *objects_buf)
 	commons.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
 	args_cone.theta = M_PI / 6.0f;
 	args_cone.h = 1.0f;
-	args_cone.c = (t_vec4){{1.0f, 5.0f, 2.0f, 1.0f}};
-	args_cone.v = (t_vec4){{-1.0f, 1.0f, -5.0f, 1.0f}};
+	args_cone.c = (t_vec4){{1.0f, 5.0f, 1.0f, 1.0f}};
+	args_cone.v = (t_vec4){{0.1f, -0.5f, -1.0f, 1.0f}};
 	return (new_cone(commons, &args_cone, objects_buf));
 }
 
@@ -58,11 +58,11 @@ static size_t		get_plane(char *objects_buf)
 	t_new_plane_args			args_plane;
 	t_object_commons			commons;
 
-	commons.reflectivity = 0.1f;
+	commons.reflectivity = 0.0f;
 	commons.transparency = 0.0f;
 	commons.ior = 1.5;
-	commons.k_a = (t_vec4){{0.1f, 0.9f, 0.6f, 1}};
-	commons.k_d = (t_vec4){{0.1f, 0.9f, 0.6f, 1}};
+	commons.k_a = (t_vec4){{1.0f, 1.0f, 1.0f, 1}};
+	commons.k_d = (t_vec4){{1.0f, 1.0f, 1.0f, 1}};
 	commons.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
 	commons.specular_alpha = 5;
 	args_plane.n = (t_vec4){{0.0f, 0.0f, 1.0f, 1}};
@@ -76,8 +76,8 @@ static size_t		get_distant_light(char *lights_buf)
 	t_light_commons				commons;
 
 	commons.i_d = (t_vec4){{1.0f, 1.0f, 1.0f}};
-	commons.i_s = (t_vec4){{0.3f, 0.3f, 0.3f}};
-	args_light.d = (t_vec4){{1.0f, 1.0f, -1.0f, 1}};
+	commons.i_s = (t_vec4){{1.0f, 1.0f, 1.0f}};
+	args_light.d = (t_vec4){{0.0f, 1.0f, -1.0f, 1}};
 	return (new_distant_light(commons, &args_light, lights_buf));
 }
 
@@ -138,7 +138,7 @@ void						test_cl_color(void)
 		dispatcher.marker.p_img, settings.window_width);
 
 	settings.num_objects = 3;
-	buf_size = sizeof(t_cone) + sizeof(t_sphere) + sizeof(t_plane) +
+	buf_size = sizeof(t_sphere) + sizeof(t_cone) + sizeof(t_plane) +
 		sizeof(int) * settings.num_objects;
 	settings.objects_buf_size = buf_size;
 	settings.objects_buf = (char *)ft_memalloc(buf_size);
@@ -153,8 +153,10 @@ void						test_cl_color(void)
 	if (init_clkit(
 		&clkit, srcs, sizeof(srcs) / sizeof(char *), &settings) == RT_FAIL)
 		return ;
+
 	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings) == RT_FAIL)
 		return ;
+
 	enqueue_ndrange_kernel(*(clkit.cmd_queues), *(clkit.kernels),
 		settings.window_width * settings.window_height);
 

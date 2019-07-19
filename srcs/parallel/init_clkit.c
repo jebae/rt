@@ -25,7 +25,7 @@ int					init_clkit(
 	char			*src;
 
 	src = NULL;
-	if (clk_set_device(clkit, CL_DEVICE_TYPE_GPU) == CLKIT_FAIL)
+	if (clk_set_device(clkit, CL_DEVICE_TYPE_CPU) == CLKIT_FAIL)
 		return (handle_fail(src));
 	clk_get_device_info(clkit);
 	if (clk_create_context(clkit) == CLKIT_FAIL)

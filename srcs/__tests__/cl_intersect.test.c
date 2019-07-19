@@ -78,6 +78,7 @@ void						test_cl_intersect(void)
 		"kernels/object/intersect.cl",
 		"kernels/object/sphere.cl",
 		"kernels/object/cone.cl",
+		"kernels/object/plane.cl",
 		"kernels/ray/hit_point.cl",
 		"kernels/ray/ray_origin.cl",
 		"kernels/ray/trace.cl",

@@ -9,6 +9,10 @@
 #define RT_FALSE						0
 #define RT_BACKGROUND_COLOR				0x000000
 
+# define RT_RAY_TYPE_NONE				0
+# define RT_RAY_TYPE_REFLECTION			1
+# define RT_RAY_TYPE_REFRACTION			2
+
 #define RT_OBJECT_TYPE_SPHERE			0
 #define RT_OBJECT_TYPE_CONE				1
 #define RT_OBJECT_TYPE_PLANE			2
@@ -16,7 +20,7 @@
 #define RT_LIGHT_TYPE_DISTANT			0
 
 #define RT_MAX_DEPTH					5
-#define RT_MAX_RECORD					32
+#define RT_MAX_RECORD					63
 #define RT_BIAS							1e-3
 
 typedef struct			s_vec4
@@ -120,6 +124,22 @@ typedef struct				s_global_settings
 	__global char		*objects_buf;
 	__global char		*lights_buf;
 }							t_global_settings;
+
+typedef struct				s_global_settings_args
+{
+	int						window_width;
+	int						window_height;
+	int						num_objects;
+	int						num_lights;
+	size_t					objects_buf_size;
+	size_t					lights_buf_size;
+	t_ray_grid_properties	ray_grid_props;
+	t_vec4					i_a;
+	int						*img_buf;
+	char					*kernel_name;
+	char					*objects_buf;
+	char					*lights_buf;
+}							t_global_settings_args;
 
 /*
 ** gmath
@@ -293,9 +313,18 @@ void								init_rgb_color(t_vec4 *rgb);
 
 t_vec4								ambient(t_vec4 *i_a, t_vec4 *k_a);
 
+t_ray								get_reflect_ray(t_trace_record *rec);
+
 /*
 ** shadow
 */
+t_ray								get_shadow_ray(
+	t_trace_record *rec,
+	__global char *lights_buf
+);
+
+float								get_transparency(__global char *objects_buf);
+
 float								get_transmittance(
 	t_trace_record *rec,
 	__global char *lights_buf,

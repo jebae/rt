@@ -36,6 +36,7 @@ int			ray_trace(
 		// pop -> push reflect and refract
 		rec = pop_rec_queue(rec_queue);
 		shade = ray_color(&rec, settings);
+		shade = scalar_mul_vec(rec.coeff, &shade);
 		rgb = vec_plus_vec(&rgb, &shade);
 		// calculate rgb from current surface -> sum
 	}
