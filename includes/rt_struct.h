@@ -31,8 +31,7 @@ typedef struct				s_ray_grid_properties
 */
 typedef struct				s_light_commons
 {
-	t_vec4		i_d;
-	t_vec4		i_s;
+	t_vec4		intensity;
 }							t_light_commons;
 
 typedef struct				s_distant_light
@@ -47,9 +46,7 @@ typedef struct				s_object_commons
 	float		reflectivity;
 	float		transparency;
 	float		ior;
-	t_vec4		k_a;
-	t_vec4		k_d;
-	t_vec4		k_s;
+	t_vec4		color;
 }							t_object_commons;
 
 typedef struct				s_sphere

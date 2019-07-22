@@ -1,4 +1,4 @@
-t_vec4				diffuse(float n_l, t_vec4 *i_d, t_vec4 *k_d)
+t_vec4				diffuse(float n_l, t_vec4 *intensity, t_vec4 *color)
 {
 	int			i;
 	t_vec4		res;
@@ -6,7 +6,7 @@ t_vec4				diffuse(float n_l, t_vec4 *i_d, t_vec4 *k_d)
 	i = 0;
 	while (i < 3)
 	{
-		res.arr[i] = i_d->arr[i] * k_d->arr[i] * n_l;
+		res.arr[i] = intensity->arr[i] * color->arr[i] * n_l;
 		i++;
 	}
 	return (res);
@@ -23,20 +23,14 @@ t_vec4				specular(
 	float		r_v;
 	t_vec4		res;
 
-	// i = -1;
-	// while (++i < 3)
-	// 	res.arr[i] = 0.0f;
-	// res.arr[3] = 1.0f;
-	// if (ray->type != RT_RAY_TYPE_NONE)
-	// 	return (res);
 	r_v = -1.0f * vec_dot_vec(r, &(ray->d));
 	r_v = MAX(0.0f, r_v);
 	r_v = pow(r_v, obj_commons->specular_alpha);
 	i = 0;
 	while (i < 3)
 	{
-		res.arr[i] = light_commons->i_s.arr[i] *
-			obj_commons->k_s.arr[i] * r_v;
+		res.arr[i] = light_commons->intensity.arr[i] *
+			obj_commons->color.arr[i] * r_v;
 		i++;
 	}
 	return (res);
@@ -58,7 +52,7 @@ t_vec4				diffuse_specular(
 	light_commons = *(__global t_light_commons *)(lights_buf + sizeof(int));
 	n_l = -1.0f * vec_dot_vec(&(rec->normal), &l);
 	n_l = MAX(0.0f, n_l);
-	shades[0] = diffuse(n_l, &(light_commons.i_d), &(obj_commons->k_d));
+	shades[0] = diffuse(n_l, &(light_commons.intensity), &(obj_commons->color));
 	shades[0] = scalar_mul_vec((1.0f - obj_commons->reflectivity) *
 		(1.0f - obj_commons->transparency), &(shades[0]));
 	r = scalar_mul_vec(2.0f * n_l, &(rec->normal));

@@ -20,6 +20,7 @@
 #define RT_OBJECT_TYPE_CYLINDER			4
 
 #define RT_LIGHT_TYPE_DISTANT			0
+#define RT_LIGHT_TYPE_SPHERICAL			1
 
 #define RT_MAX_DEPTH					5
 #define RT_MAX_RECORD					63
@@ -61,8 +62,7 @@ typedef struct				s_ray
 
 typedef struct				s_light_commons
 {
-	t_vec4		i_d;
-	t_vec4		i_s;
+	t_vec4		intensity;
 }							t_light_commons;
 
 typedef struct				s_distant_light
@@ -71,15 +71,19 @@ typedef struct				s_distant_light
 	t_vec4				d;
 }							t_distant_light;
 
+typedef struct				s_spherical_light
+{
+	t_light_commons		commons;
+	t_vec4				origin;
+}							t_spherical_light;
+
 typedef struct				s_object_commons
 {
 	int			specular_alpha;
 	float		reflectivity;
 	float		transparency;
 	float		ior;
-	t_vec4		k_a;
-	t_vec4		k_d;
-	t_vec4		k_s;
+	t_vec4		color;
 }							t_object_commons;
 
 typedef struct				s_sphere
@@ -402,7 +406,7 @@ t_vec4								specular(
 
 void								init_rgb_color(t_vec4 *rgb);
 
-t_vec4								ambient(t_vec4 *i_a, t_vec4 *k_a);
+t_vec4								ambient(t_vec4 *intensity, t_vec4 *color);
 
 t_ray								get_reflect_ray(t_trace_record *rec);
 

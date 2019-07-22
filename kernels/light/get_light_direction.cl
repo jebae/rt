@@ -9,5 +9,7 @@ t_vec4			get_light_direction(
 	type = *((__global int *)lights_buf);
 	if (type == RT_LIGHT_TYPE_DISTANT)
 		d = distant_light_direction(lights_buf + sizeof(int), point);
+	// else if (type == RT_LIGHT_TYPE_SPHERICAL)
+	// 	d = spherical_light_direction(lights_buf + sizeof(int), point);
 	return (d);
 }

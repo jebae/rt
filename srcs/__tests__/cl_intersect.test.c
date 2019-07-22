@@ -59,7 +59,7 @@ static size_t		get_distant_light(char *lights_buf)
 	t_new_distant_light_args	args_light;
 	t_light_commons				commons;
 
-	commons.i_d = (t_vec4){{1.0f, 1.0f, 1.0f, 1.0f}};
+	commons.intensity = (t_vec4){{1.0f, 1.0f, 1.0f, 1.0f}};
 	args_light.d = (t_vec4){{1.0f, 1.0f, 1.0f, 1.0f}};
 	return (new_distant_light(commons, &args_light, lights_buf));
 }

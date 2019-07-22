@@ -24,9 +24,7 @@ static size_t		get_sphere(char *objects_buf)
 	commons.reflectivity = 0.1f;
 	commons.transparency = 0.9f;
 	commons.ior = 4.5f;
-	commons.k_a = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
-	commons.k_d = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
-	commons.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
+	commons.color = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
 	commons.specular_alpha = 50;
 	args_sphere.r = 9.2f;
 	args_sphere.c = (t_vec4){{1.0f, 10.0f, 2.0f, 1}};
@@ -42,9 +40,7 @@ static size_t		get_cone(char *objects_buf)
 	commons.reflectivity = 0.7f;
 	commons.transparency = 0.0f;
 	commons.ior = 8.0f;
-	commons.k_a = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
-	commons.k_d = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
-	commons.k_s = (t_vec4){{0.5f, 0.5f, 0.5f, 1}};
+	commons.color = (t_vec4){{0.2f, 0.5f, 0.7f, 1}};
 	args_cone.theta = M_PI / 6.0f;
 	args_cone.h = 3.0f;
 	args_cone.c = (t_vec4){{-2.0f, 6.0f, 0.0f, 1}};
