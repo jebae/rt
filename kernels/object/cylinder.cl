@@ -21,7 +21,7 @@ t_cylinder_intersect_coefficients		get_cylinder_intersect_coefficients(
 	return (coeff);
 }
 
-float		get_cylinder_t(
+float									get_cylinder_t(
 	t_cylinder_intersect_coefficients *coeff,
 	float det,
 	t_cylinder *cylinder,
@@ -32,9 +32,9 @@ float		get_cylinder_t(
 	float		t[2];
 	t_vec4		cp;
 
-	t[0] = (-1.0f * coeffs->b - sqrt(det)) / coeffs->a;
-	t[1] = (-1.0f * coeffs->b + sqrt(det)) / coeffs->a;
-	if (coeffs->a < 0.0f)
+	t[0] = (-1.0f * coeff->b - sqrt(det)) / coeff->a;
+	t[1] = (-1.0f * coeff->b + sqrt(det)) / coeff->a;
+	if (coeff->a < 0.0f)
 		swap_float(&(t[0]), &(t[1]));
 	i = 0;
 	while (i < 2)
@@ -52,7 +52,7 @@ float		get_cylinder_t(
 	return (-1.0f);
 }
 
-int			cylinder_intersect(
+int										cylinder_intersect(
 	__global char *objects_buf,
 	t_ray *ray,
 	float *t
@@ -78,13 +78,13 @@ t_vec4			cylinder_normal(
 	t_vec4 *point
 )
 {
+	t_cylinder		cylinder;
 	t_vec4			cp;
 	t_vec4			n;
-	t_cylinder		*cylinder;
 
-	cylinder = (t_cylinder *)object;
-	cp = vec_sub_vec(point, &(cylinder->c));
-	n = scalar_mul_vec(vec_dot_vec(&cp, &(cylinder->v)), &(cylinder->v));
+	cylinder = *(__global t_cylinder *)objects_buf;
+	cp = vec_sub_vec(point, &(cylinder.c));
+	n = scalar_mul_vec(vec_dot_vec(&cp, &(cylinder.v)), &(cylinder.v));
 	n = vec_sub_vec(&cp, &n);
 	return (normalize_vec(&n));
 }

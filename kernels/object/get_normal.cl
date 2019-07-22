@@ -15,5 +15,7 @@ t_vec4			get_normal(
 		return (plane_normal(objects_buf + sizeof(int), point));
 	else if (type == RT_OBJECT_TYPE_TRIANGLE)
 		return (triangle_normal(objects_buf + sizeof(int), point));
+	else if (type == RT_OBJECT_TYPE_CYLINDER)
+		return (cylinder_normal(objects_buf + sizeof(int), point));
 	return (dumb_normal);
 }

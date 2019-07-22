@@ -11,5 +11,7 @@ size_t		get_object_stride(__global char *objects_buf)
 		return (sizeof(t_plane) + sizeof(int));
 	else if (type == RT_OBJECT_TYPE_TRIANGLE)
 		return (sizeof(t_triangle) + sizeof(int));
+	else if (type == RT_OBJECT_TYPE_CYLINDER)
+		return (sizeof(t_cylinder) + sizeof(int));
 	return (0);
 }

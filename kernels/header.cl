@@ -284,6 +284,18 @@ t_vec4								sphere_normal(
 	t_vec4 *point
 );
 
+t_cone_intersect_coefficients		get_cone_intersect_coefficients(
+	t_cone *cone,
+	t_ray *ray
+);
+
+float								get_cone_t(
+	t_cone_intersect_coefficients *coeffs,
+	float det,
+	t_cone *cone,
+	t_ray *ray
+);
+
 t_vec4								cone_normal(
 	__global char *objects_buf,
 	t_vec4 *point
@@ -306,18 +318,6 @@ t_vec4								triangle_normal(
 	t_vec4 *point
 );
 
-t_cone_intersect_coefficients		get_cone_intersect_coefficients(
-	t_cone *cone,
-	t_ray *ray
-);
-
-float								get_cone_t(
-	t_cone_intersect_coefficients *coeffs,
-	float det,
-	t_cone *cone,
-	t_ray *ray
-);
-
 int									plane_intersect(
 	__global char *objects_buf,
 	t_ray *ray,
@@ -325,6 +325,29 @@ int									plane_intersect(
 );
 
 t_vec4								plane_normal(
+	__global char *objects_buf,
+	t_vec4 *point
+);
+
+t_cylinder_intersect_coefficients	get_cylinder_intersect_coefficients(
+	t_cylinder *cylinder,
+	t_ray *ray
+);
+
+float								get_cylinder_t(
+	t_cylinder_intersect_coefficients *coeff,
+	float det,
+	t_cylinder *cylinder,
+	t_ray *ray
+);
+
+int									cylinder_intersect(
+	__global char *objects_buf,
+	t_ray *ray,
+	float *t
+);
+
+t_vec4								cylinder_normal(
 	__global char *objects_buf,
 	t_vec4 *point
 );

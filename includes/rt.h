@@ -98,6 +98,12 @@ size_t						new_triangle(
 	char *objects_buf
 );
 
+size_t						new_cylinder(
+	t_object_commons commons,
+	t_new_cylinder_args *args_cylinder,
+	char *objects_buf
+);
+
 /*
 ** shading
 */

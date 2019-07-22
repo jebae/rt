@@ -17,5 +17,7 @@ int			intersect(
 		res = plane_intersect(objects_buf + sizeof(int), ray, t);
 	else if (type == RT_OBJECT_TYPE_TRIANGLE)
 		res = triangle_intersect(objects_buf + sizeof(int), ray, t);
+	else if (type == RT_OBJECT_TYPE_CYLINDER)
+		res = cylinder_intersect(objects_buf + sizeof(int), ray, t);
 	return (res);
 }
