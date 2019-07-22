@@ -21,8 +21,10 @@ int				triangle_intersect(
 	t_vec4			v;
 
 	triangle = *(__global t_triangle *)objects_buf;
-	vec_to_mat_row(&(triangle.u), &mat, 0);
-	vec_to_mat_row(&(triangle.v), &mat, 1);
+	v = scalar_mul_vec(-1.0f, &(triangle.u));
+	vec_to_mat_row(&v, &mat, 0);
+	v = scalar_mul_vec(-1.0f, &(triangle.v));
+	vec_to_mat_row(&v, &mat, 1);
 	vec_to_mat_row(&(ray->d), &mat, 2);
 	mat = mat_transpose(&mat);
 	v = vec_sub_vec(&(triangle.a), &(ray->e));

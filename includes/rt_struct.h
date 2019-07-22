@@ -105,10 +105,7 @@ typedef struct 				s_cylinder
 	float				r;
 	float				h;
 	t_vec4				c;
-	t_vec4				c_rotated;
 	t_vec4				v;
-	t_quaternion		q;
-	t_quaternion		q_i;
 }							t_cylinder;
 
 typedef struct				s_cylinder_intersect_coefficients

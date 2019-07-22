@@ -17,6 +17,7 @@
 #define RT_OBJECT_TYPE_CONE				1
 #define RT_OBJECT_TYPE_PLANE			2
 #define RT_OBJECT_TYPE_TRIANGLE			3
+#define RT_OBJECT_TYPE_CYLINDER			4
 
 #define RT_LIGHT_TYPE_DISTANT			0
 
@@ -120,6 +121,22 @@ typedef struct				s_triangle
 	t_vec4				v;
 	t_vec4				n;
 }							t_triangle;
+
+typedef struct 				s_cylinder
+{
+	t_object_commons	commons;
+	float				r;
+	float				h;
+	t_vec4				c;
+	t_vec4				v;
+}							t_cylinder;
+
+typedef struct				s_cylinder_intersect_coefficients
+{
+	float				a;
+	float				b;
+	float				c;
+}							t_cylinder_intersect_coefficients;
 
 typedef struct				s_trace_record
 {
