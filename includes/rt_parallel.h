@@ -6,7 +6,7 @@
 # include <stdio.h> // remove after
 
 # define RT_NUM_CL_KERNELS				1
-# define RT_NUM_CL_MEMS					2
+# define RT_NUM_CL_MEMS					3
 # define RT_CL_MEM_IMAGE				0
 # define RT_CL_MEM_OBJECTS				1
 # define RT_CL_MEM_LIGHTS				2
@@ -26,7 +26,7 @@ int						init_clkit(
 int						set_kernel_args(
 	cl_kernel kernel,
 	cl_mem *mems,
-	t_global_settings *settings
+	t_global_settings_args *settings
 );
 
 int						enqueue_ndrange_kernel(

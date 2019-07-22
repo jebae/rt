@@ -2,7 +2,7 @@
 # define RT_TEST_H
 
 # include "rt.h"
-// # include "rt_parallel.h"
+# include "rt_parallel.h"
 # include "draw.h"
 # include <mlx.h>
 # include <stdio.h>
@@ -43,8 +43,8 @@ char        		*get_img_buffer(void *p_img, int width);
 ** tests
 */
 void				test_ray_direction(void);
-void				test_cl_intersect(void);
-void				test_cl_color(void);
+void				test_cl_intersect(int parallel_mode);
+void				test_cl_color(int parallel_mode);
 
 
 #endif

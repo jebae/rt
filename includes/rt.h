@@ -26,6 +26,7 @@
 # define RT_OBJECT_TYPE_CYLINDER	4
 
 # define RT_LIGHT_TYPE_DISTANT		0
+# define RT_LIGHT_TYPE_SPHERICAL	1
 
 typedef enum				e_rgb_shades_idx
 {
@@ -59,6 +60,12 @@ t_vec4						hit_point(t_ray *ray, float t);
 size_t						new_distant_light(
 	t_light_commons commons,
 	t_new_distant_light_args *args_light,
+	char *lights_buf
+);
+
+size_t						new_spherical_light(
+	t_light_commons commons,
+	t_new_spherical_light_args *args_light,
 	char *lights_buf
 );
 

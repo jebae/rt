@@ -6,6 +6,14 @@ static float		HEIGHT = 800;
 
 static t_vec4		i_a = (t_vec4){{0.2f, 0.2f, 0.2f, 1.0f}};
 
+static void						set_global_settings_args(
+	t_global_settings_args *settings_args,
+	t_global_settings *settings
+)
+{
+	ft_memcpy(settings_args, settings, sizeof(t_global_settings_args));
+}
+
 static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 {
 	t_ray_grid_properties	props;
@@ -76,13 +84,14 @@ static void			write_lights(char *lights_buf)
 	lights_buf += get_distant_light(lights_buf);
 }
 
-void						test_cl_intersect(void)
+void						test_cl_intersect(int parallel_mode)
 {
-	t_test_dispatcher	dispatcher;
-	size_t				buf_size;
-	t_clkit				clkit;
-	t_global_settings	settings;
-	static char			*srcs[] = {
+	t_test_dispatcher		dispatcher;
+	size_t					buf_size;
+	t_clkit					clkit;
+	t_global_settings		settings;
+	t_global_settings_args	settings_args;
+	static char				*srcs[] = {
 		"kernels/header.cl",
 		"kernels/gmath/vec4/vec4_operator.cl",
 		"kernels/gmath/mat4/mat4_operator.cl",
@@ -101,6 +110,7 @@ void						test_cl_intersect(void)
 		"kernels/__tests__/intersect.test.cl"
 	};
 
+	settings.parallel_mode = parallel_mode;
 	settings.window_width = WIDTH;
 	settings.window_height = HEIGHT;
 	init_mlx(&dispatcher, WIDTH, HEIGHT);
@@ -126,10 +136,12 @@ void						test_cl_intersect(void)
 	settings.lights_buf = (char *)ft_memalloc(buf_size);
 	write_lights(settings.lights_buf);
 
+	set_global_settings_args(&settings_args, &settings);
+
 	if (init_clkit(
 		&clkit, srcs, sizeof(srcs) / sizeof(char *), &settings) == RT_FAIL)
 		return ;
-	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings) == RT_FAIL)
+	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings_args) == RT_FAIL)
 		return ;
 	enqueue_ndrange_kernel(*(clkit.cmd_queues), *(clkit.kernels),
 		settings.window_width * settings.window_height);

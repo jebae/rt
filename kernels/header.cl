@@ -65,6 +65,13 @@ typedef struct				s_light_commons
 	t_vec4		intensity;
 }							t_light_commons;
 
+typedef struct				s_light_attr
+{
+	float		dist;
+	t_vec4		direction;
+	t_vec4		intensity;
+}							t_light_attr;
+
 typedef struct				s_distant_light
 {
 	t_light_commons		commons;
@@ -180,10 +187,6 @@ typedef struct				s_global_settings_args
 	size_t					lights_buf_size;
 	t_ray_grid_properties	ray_grid_props;
 	t_vec4					i_a;
-	int						*img_buf;
-	char					*kernel_name;
-	char					*objects_buf;
-	char					*lights_buf;
 }							t_global_settings_args;
 
 /*
@@ -241,12 +244,17 @@ int							trace(
 /*
 ** light
 */
-t_vec4								get_light_direction(
+t_light_attr						get_light_attr(
 	__global char *lights_buf,
 	t_vec4 *point
 );
 
-t_vec4								distant_light_direction(
+t_light_attr						distant_light_attr(
+	__global char *lights_buf,
+	t_vec4 *point
+);
+
+t_light_attr						spherical_light_attr(
 	__global char *lights_buf,
 	t_vec4 *point
 );
@@ -395,13 +403,13 @@ t_vec4								diffuse_specular(
 	__global char *lights_buf
 );
 
-t_vec4								diffuse(float n_l, t_vec4 *i_d, t_vec4 *k_d);
+t_vec4								diffuse(float n_l, t_vec4 *intensity, t_vec4 *color);
 
 t_vec4								specular(
 	t_vec4 *r,
 	t_ray *ray,
 	t_object_commons *obj_commons,
-	t_light_commons *light_commons
+	t_vec4 *intensity
 );
 
 void								init_rgb_color(t_vec4 *rgb);
@@ -431,7 +439,8 @@ int									refract_record(
 */
 t_ray								get_shadow_ray(
 	t_trace_record *rec,
-	__global char *lights_buf
+	__global char *lights_buf,
+	float *dist
 );
 
 float								get_transmittance(

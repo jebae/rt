@@ -62,4 +62,9 @@ typedef struct				s_new_distant_light_args
 	t_vec4		d;
 }							t_new_distant_light_args;
 
+typedef struct				s_new_spherical_light_args
+{
+	t_vec4		origin;
+}							t_new_spherical_light_args;
+
 #endif

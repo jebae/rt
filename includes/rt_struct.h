@@ -26,9 +26,6 @@ typedef struct				s_ray_grid_properties
 	t_vec4		dy;
 }							t_ray_grid_properties;
 
-/*
-** think about add light color later
-*/
 typedef struct				s_light_commons
 {
 	t_vec4		intensity;
@@ -39,6 +36,12 @@ typedef struct				s_distant_light
 	t_light_commons		commons;
 	t_vec4				d;
 }							t_distant_light;
+
+typedef struct				s_spherical_light
+{
+	t_light_commons		commons;
+	t_vec4				origin;
+}							t_spherical_light;
 
 typedef struct				s_object_commons
 {
@@ -122,10 +125,23 @@ typedef struct				s_global_settings
 	size_t					lights_buf_size;
 	t_ray_grid_properties	ray_grid_props;
 	t_vec4					i_a;
+	int						parallel_mode;
 	int						*img_buf;
 	char					*kernel_name;
 	char					*objects_buf;
 	char					*lights_buf;
 }							t_global_settings;
+
+typedef struct				s_global_settings_args
+{
+	int						window_width;
+	int						window_height;
+	int						num_objects;
+	int						num_lights;
+	size_t					objects_buf_size;
+	size_t					lights_buf_size;
+	t_ray_grid_properties	ray_grid_props;
+	t_vec4					i_a;
+}							t_global_settings_args;
 
 #endif
