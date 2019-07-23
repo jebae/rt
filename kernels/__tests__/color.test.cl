@@ -16,7 +16,6 @@ __kernel void		color_test(
 	ray = ray_origin(
 		&(settings_args.ray_grid_props),
 		idx % settings_args.window_width, idx / settings_args.window_width);
-	// this ior can be decided with location of camera (but simply in air -> 1.0f)
 	ray.ior_medium = 1.0f;
 	if (trace(ray, NULL, &rec, &settings))
 	{

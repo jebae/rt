@@ -67,4 +67,16 @@ typedef struct				s_new_spherical_light_args
 	t_vec4		origin;
 }							t_new_spherical_light_args;
 
+typedef struct				s_global_settings_args
+{
+	int						window_width;
+	int						window_height;
+	int						num_objects;
+	int						num_lights;
+	size_t					objects_buf_size;
+	size_t					lights_buf_size;
+	t_ray_grid_properties	ray_grid_props;
+	t_vec4					i_a;
+}							t_global_settings_args;
+
 #endif

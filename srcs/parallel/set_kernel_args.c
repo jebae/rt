@@ -3,7 +3,7 @@
 int			set_kernel_args(
 	cl_kernel kernel,
 	cl_mem *mems,
-	t_global_settings_args *settings
+	t_global_settings *settings
 )
 {
 	if (clk_set_kernel_arg(kernel, 0, sizeof(cl_mem),

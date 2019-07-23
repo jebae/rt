@@ -26,7 +26,7 @@ int						init_clkit(
 int						set_kernel_args(
 	cl_kernel kernel,
 	cl_mem *mems,
-	t_global_settings_args *settings
+	t_global_settings *settings
 );
 
 int						enqueue_ndrange_kernel(

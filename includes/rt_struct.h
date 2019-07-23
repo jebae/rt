@@ -132,16 +132,5 @@ typedef struct				s_global_settings
 	char					*lights_buf;
 }							t_global_settings;
 
-typedef struct				s_global_settings_args
-{
-	int						window_width;
-	int						window_height;
-	int						num_objects;
-	int						num_lights;
-	size_t					objects_buf_size;
-	size_t					lights_buf_size;
-	t_ray_grid_properties	ray_grid_props;
-	t_vec4					i_a;
-}							t_global_settings_args;
 
 #endif

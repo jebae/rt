@@ -1,17 +1,9 @@
 #include "rt_test.h"
 #include "rt_parallel.h"
 
-static float		WIDTH = 1000;
-static float		HEIGHT = 800;
+static float		WIDTH = 1600;
+static float		HEIGHT = 1200;
 static t_vec4		i_a = (t_vec4){{0.05f, 0.05f, 0.05f, 1.0f}};
-
-static void						set_global_settings_args(
-	t_global_settings_args *settings_args,
-	t_global_settings *settings
-)
-{
-	ft_memcpy(settings_args, settings, sizeof(t_global_settings_args));
-}
 
 static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 {
@@ -175,7 +167,6 @@ void						test_cl_color(int parallel_mode)
 	size_t					buf_size;
 	t_clkit					clkit;
 	t_global_settings		settings;
-	t_global_settings_args	settings_args;
 	static char				*srcs[] = {
 		"kernels/header.cl",
 		"kernels/data_structure/trace_record_queue.cl",
@@ -238,13 +229,11 @@ void						test_cl_color(int parallel_mode)
 	settings.lights_buf = (char *)ft_memalloc(buf_size);
 	write_lights(settings.lights_buf);
 
-	set_global_settings_args(&settings_args, &settings);
-
 	if (init_clkit(
 		&clkit, srcs, sizeof(srcs) / sizeof(char *), &settings) == RT_FAIL)
 		return ;
 
-	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings_args) == RT_FAIL)
+	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings) == RT_FAIL)
 		return ;
 
 	enqueue_ndrange_kernel(*(clkit.cmd_queues), *(clkit.kernels),
