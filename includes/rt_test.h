@@ -45,6 +45,7 @@ char        		*get_img_buffer(void *p_img, int width);
 void				test_ray_direction(void);
 void				test_cl_intersect(int parallel_mode);
 void				test_cl_color(int parallel_mode);
+void				render_scene1(int parallel_mode);
 
 
 #endif
