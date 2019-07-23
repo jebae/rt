@@ -27,6 +27,8 @@ int					reflect_record(
 	{
 		commons = get_object_commons(prev->objects_buf);
 		cur->coeff = prev->coeff * commons.reflectivity;
+		if (cur->coeff == 0.0f)
+			return (RT_FALSE);
 		cur->depth = prev->depth + 1;
 		return (RT_TRUE);
 	}

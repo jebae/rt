@@ -66,6 +66,8 @@ int					refract_record(
 	{
 		commons = get_object_commons(prev->objects_buf);
 		cur->coeff = prev->coeff * (1.0f - commons.reflectivity) * commons.transparency;
+		if (cur->coeff == 0.0f)
+			return (RT_FALSE);
 		cur->depth = prev->depth + 1;
 		return (RT_TRUE);
 	}
