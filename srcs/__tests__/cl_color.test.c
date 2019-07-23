@@ -1,8 +1,8 @@
 #include "rt_test.h"
 #include "rt_parallel.h"
 
-static float		WIDTH = 1600;
-static float		HEIGHT = 1200;
+static float		WIDTH = 1000;
+static float		HEIGHT = 800;
 static t_vec4		i_a = (t_vec4){{0.05f, 0.05f, 0.05f, 1.0f}};
 
 static void						set_global_settings_args(
@@ -18,8 +18,8 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 	t_ray_grid_properties	props;
 	t_camera				cam;
 
-	cam.focus = (t_vec4){{0, 1, 0, 1}};
-	cam.pos = (t_vec4){{0, 0, 0.0f, 1}};
+	cam.focus = (t_vec4){{0, 3.0, 0, 1}};
+	cam.pos = (t_vec4){{0, 0.0, 0.0f, 1}};
 	cam.roll = 0;
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
@@ -31,12 +31,12 @@ static size_t		get_sphere(char *objects_buf)
 	t_object_commons			commons;
 
 	commons.specular_alpha = 50;
-	commons.reflectivity = 0.2f;
-	commons.transparency = 0.2f;
+	commons.reflectivity = 0.1f;
+	commons.transparency = 0.0f;
 	commons.ior = 1.5f;
 	commons.color = (t_vec4){{0.9f, 0.6f, 0.1f, 1}};
 	args_sphere.r = 1.0f;
-	args_sphere.c = (t_vec4){{-2.0f, 5.0f, 1.0f, 1.0f}};
+	args_sphere.c = (t_vec4){{-2.0f, 5.0f, 0.5f, 1.0f}};
 	return (new_sphere(commons, &args_sphere, objects_buf));
 }
 
@@ -47,13 +47,13 @@ static size_t		get_cone(char *objects_buf)
 
 	commons.specular_alpha = 50;
 	commons.reflectivity = 0.3f;
-	commons.transparency = 0.3f;
+	commons.transparency = 0.0f;
 	commons.ior = 1.5f;
 	commons.color = (t_vec4){{0.8f, 0.2f, 0.7f, 1}};
 	args_cone.theta = M_PI / 6.0f;
 	args_cone.h = 1.0f;
-	args_cone.c = (t_vec4){{1.0f, 4.0f, 1.0f, 1.0f}};
-	args_cone.v = (t_vec4){{0.0f, 0.0f, -1.0f, 1.0f}};
+	args_cone.c = (t_vec4){{1.5f, 4.0f, 1.0f, 1.0f}};
+	args_cone.v = (t_vec4){{-0.5f, -1.0f, -3.0f, 1.0f}};
 	return (new_cone(commons, &args_cone, objects_buf));
 }
 
@@ -63,14 +63,31 @@ static size_t		get_cylinder(char *objects_buf)
 	t_object_commons			commons;
 
 	commons.specular_alpha = 50;
-	commons.reflectivity = 1.0f;
+	commons.reflectivity = 0.8f;
 	commons.transparency = 0.0f;
 	commons.ior = 1.5f;
 	commons.color = (t_vec4){{0.1f, 0.6f, 0.3f, 1}};
 	args_cylinder.r = 1.0f;
 	args_cylinder.h = 1.5f;
 	args_cylinder.c = (t_vec4){{0.0f, 5.0f, 2.0f, 1.0f}};
-	args_cylinder.v = (t_vec4){{1.0f, -0.5f, -1.0f, 1.0f}};
+	args_cylinder.v = (t_vec4){{0.5f, -0.5f, -1.5f, 1.0f}};
+	return (new_cylinder(commons, &args_cylinder, objects_buf));
+}
+
+static size_t		get_cylinder2(char *objects_buf)
+{
+	t_new_cylinder_args			args_cylinder;
+	t_object_commons			commons;
+
+	commons.specular_alpha = 50;
+	commons.reflectivity = 0.0f;
+	commons.transparency = 0.0f;
+	commons.ior = 1.5f;
+	commons.color = (t_vec4){{0.1f, 0.6f, 0.3f, 1}};
+	args_cylinder.r = 0.99f;
+	args_cylinder.h = 1.5f;
+	args_cylinder.c = (t_vec4){{0.0f, 5.0f, 2.0f, 1.0f}};
+	args_cylinder.v = (t_vec4){{0.5f, -0.5f, -1.5f, 1.0f}};
 	return (new_cylinder(commons, &args_cylinder, objects_buf));
 }
 
@@ -105,15 +122,15 @@ static size_t		get_plane(char *objects_buf)
 // 	return (new_triangle(commons, &args_triangle, objects_buf));
 // }
 
-// static size_t		get_distant_light(char *lights_buf)
-// {
-// 	t_new_distant_light_args	args_light;
-// 	t_light_commons				commons;
+static size_t		get_distant_light(char *lights_buf)
+{
+	t_new_distant_light_args	args_light;
+	t_light_commons				commons;
 
-// 	commons.intensity = (t_vec4){{1.0f, 1.0f, 1.0f}};
-// 	args_light.d = (t_vec4){{1.0f, 1.0f, -1.0f, 1}};
-// 	return (new_distant_light(commons, &args_light, lights_buf));
-// }
+	commons.intensity = (t_vec4){{1.0f, 1.0f, 1.0f}};
+	args_light.d = (t_vec4){{1.0f, 1.0f, -1.0f, 1}};
+	return (new_distant_light(commons, &args_light, lights_buf));
+}
 
 static size_t		get_spherical_light(char *lights_buf)
 {
@@ -140,13 +157,14 @@ static void			write_objects(char *objects_buf)
 	objects_buf += get_sphere(objects_buf);
 	objects_buf += get_cone(objects_buf);
 	objects_buf += get_cylinder(objects_buf);
+	objects_buf += get_cylinder2(objects_buf);
 	objects_buf += get_plane(objects_buf);
 	// objects_buf += get_triangle(objects_buf);
 }
 
 static void			write_lights(char *lights_buf)
 {
-	// lights_buf += get_distant_light(lights_buf);
+	lights_buf += get_distant_light(lights_buf);
 	lights_buf += get_spherical_light(lights_buf);
 	lights_buf += get_spherical_light2(lights_buf);
 }
@@ -204,16 +222,17 @@ void						test_cl_color(int parallel_mode)
 	settings.img_buf = (int *)get_img_buffer(
 		dispatcher.marker.p_img, settings.window_width);
 
-	settings.num_objects = 4;
+	settings.num_objects = 5;
 	buf_size = sizeof(t_sphere) + sizeof(t_cone) + sizeof(t_plane) +
-		sizeof(t_cylinder) +
+		sizeof(t_cylinder) + sizeof(t_cylinder) +
 		sizeof(int) * settings.num_objects;
 	settings.objects_buf_size = buf_size;
 	settings.objects_buf = (char *)ft_memalloc(buf_size);
 	write_objects(settings.objects_buf);
 
-	settings.num_lights = 2;
+	settings.num_lights = 3;
 	buf_size = sizeof(t_spherical_light) + sizeof(t_spherical_light) +
+		sizeof(t_distant_light) +
 		sizeof(int) * settings.num_lights;
 	settings.lights_buf_size = buf_size;
 	settings.lights_buf = (char *)ft_memalloc(buf_size);
