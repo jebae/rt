@@ -77,6 +77,10 @@ HEADERS = $(INCDIR)/rt.h\
 	$(INCDIR)/rt_args.h\
 	$(INCDIR)/rt_parallel.h\
 	$(INCDIR)/rt_struct.h\
+	$(LIBFT_PATH)/includes/libft.h\
+	$(GMATH_PATH)/includes/gmath.h\
+	$(DRAW_PATH)/includes/draw.h\
+	$(CLKIT_PATH)/includes/clkit.h\
 
 $(OBJDIR)/%.o : $(SRCDIR)/light/%.c $(HEADERS)
 	@$(call compile_obj,$<,$@)
