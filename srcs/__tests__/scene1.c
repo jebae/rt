@@ -240,38 +240,6 @@ void				render_scene1(int parallel_mode)
 	size_t					buf_size;
 	t_clkit					clkit;
 	t_global_settings		settings;
-	static char				*srcs[] = {
-		"kernels/header.cl",
-		"kernels/data_structure/trace_record_queue.cl",
-		"kernels/gmath/vec4/vec4_operator.cl",
-		"kernels/gmath/mat4/mat4_operator.cl",
-		"kernels/light/distant_light.cl",
-		"kernels/light/spherical_light.cl",
-		"kernels/light/get_light_attr.cl",
-		"kernels/light/get_light_stride.cl",
-		"kernels/object/cone.cl",
-		"kernels/object/get_normal.cl",
-		"kernels/object/get_object_stride.cl",
-		"kernels/object/get_object_commons.cl",
-		"kernels/object/intersect.cl",
-		"kernels/object/plane.cl",
-		"kernels/object/sphere.cl",
-		"kernels/object/triangle.cl",
-		"kernels/object/cylinder.cl",
-		"kernels/preprocess/get_global_settings.cl",
-		"kernels/ray/hit_point.cl",
-		"kernels/ray/ray_origin.cl",
-		"kernels/ray/trace.cl",
-		"kernels/shade/ambient.cl",
-		"kernels/shade/color.cl",
-		"kernels/shade/diffuse_specular.cl",
-		"kernels/shade/ray_color.cl",
-		"kernels/shade/reflection.cl",
-		"kernels/shade/refraction.cl",
-		"kernels/shadow/shadow.cl",
-		"kernels/utils/swap.cl",
-		"kernels/__tests__/scene1.test.cl"
-	};
 
 	settings.parallel_mode = parallel_mode;
 	settings.window_width = WIDTH;
@@ -279,7 +247,6 @@ void				render_scene1(int parallel_mode)
 	init_mlx(&dispatcher, WIDTH, HEIGHT);
 	init_marker(&(dispatcher.marker), dispatcher.p_mlx, dispatcher.p_win, &settings);
 
-	settings.kernel_name = "scene1";
 	settings.ray_grid_props = get_ray_grid_props_for_test();
 	settings.i_a = i_a;
 
@@ -310,20 +277,7 @@ void				render_scene1(int parallel_mode)
 	settings.lights_buf = (char *)ft_memalloc(buf_size);
 	write_lights(settings.lights_buf);
 
-	if (init_clkit(
-		&clkit, srcs, sizeof(srcs) / sizeof(char *), &settings) == RT_FAIL)
-		return ;
-
-	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings) == RT_FAIL)
-		return ;
-
-	enqueue_ndrange_kernel(*(clkit.cmd_queues), *(clkit.kernels),
-		settings.window_width * settings.window_height);
-
-	enqueue_read_buffer(*(clkit.cmd_queues),
-		clkit.mems[RT_CL_MEM_IMAGE], settings.img_buf, &settings);
-
-	execute_cmd_queue(*(clkit.cmd_queues));
+	render_scene(&clkit, &settings);
 
 	release(&clkit);
 	clear_global_settings(&settings);

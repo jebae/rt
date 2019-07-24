@@ -18,9 +18,7 @@ int						create_buffers(
 
 int						init_clkit(
 	t_clkit *clkit,
-	char **kernel_srcs,
-	size_t num_kernel_files,
-	t_global_settings *args
+	t_global_settings *settings
 );
 
 int						set_kernel_args(
@@ -45,5 +43,9 @@ int						enqueue_read_buffer(
 int						execute_cmd_queue(cl_command_queue cmd_queue);
 
 int						release(t_clkit *clkit);
+
+char					*concat_kernel_src(void);
+
+int						render_scene(t_clkit *clkit, t_global_settings *settings);
 
 #endif

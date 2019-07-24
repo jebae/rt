@@ -127,7 +127,6 @@ typedef struct				s_global_settings
 	t_vec4					i_a;
 	int						parallel_mode;
 	int						*img_buf;
-	char					*kernel_name;
 	char					*objects_buf;
 	char					*lights_buf;
 }							t_global_settings;

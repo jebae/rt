@@ -17,8 +17,6 @@ static int			create_kernels(t_clkit *clkit, char *kernel_name)
 
 int					init_clkit(
 	t_clkit *clkit,
-	char **kernel_srcs,
-	size_t num_kernel_files,
 	t_global_settings *settings
 )
 {
@@ -34,7 +32,7 @@ int					init_clkit(
 		return (handle_fail(src));
 	if (create_buffers(clkit, settings) == CLKIT_FAIL)
 		return (handle_fail(src));
-	src = clk_concat_kernel_src(kernel_srcs, num_kernel_files);
+	src = concat_kernel_src();
 	if (src == NULL)
 		exit_with_memalloc_err("kernel sources");
 	if (clk_create_program(&(clkit->program),\
@@ -43,7 +41,7 @@ int					init_clkit(
 	if (clk_build_program(clkit->program,\
 		&(clkit->devices[0])) == CLKIT_FAIL)
 		return (handle_fail(src));
-	if (create_kernels(clkit, settings->kernel_name) == RT_FAIL)
+	if (create_kernels(clkit, "render") == RT_FAIL)
 		return (handle_fail(src));
 	ft_memdel((void **)&src);
 	return (RT_SUCCESS);

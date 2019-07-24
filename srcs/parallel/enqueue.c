@@ -13,7 +13,9 @@ int			enqueue_ndrange_kernel(
 	args.work_dim = 1;
 	args.global_work_size = &work_size;
 	args.local_work_size = NULL;
-	return (clk_enqueue_ndrange_kernel(&args));
+	if (clk_enqueue_ndrange_kernel(&args) == CLKIT_FAIL)
+		return (RT_FAIL);
+	return (RT_SUCCESS);
 }
 
 int			enqueue_read_buffer(
@@ -31,5 +33,7 @@ int			enqueue_read_buffer(
 	args.size = sizeof(*host_buf) *
 		settings->window_width * settings->window_height;
 	args.host_buf = host_buf;
-	return (clk_enqueue_read_buffer(&args));
+	if (clk_enqueue_read_buffer(&args) == CLKIT_FAIL)
+		return (RT_FAIL);
+	return (RT_SUCCESS);
 }

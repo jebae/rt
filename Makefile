@@ -64,6 +64,8 @@ SRC_PARALLEL = create_buffer.c\
 	enqueue.c\
 	init_clkit.c\
 	set_kernel_args.c\
+	concat_kernel_src.c\
+	render.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_LIGHT:.c=.o))
