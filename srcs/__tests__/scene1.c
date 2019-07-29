@@ -29,8 +29,7 @@ static size_t		get_distant_light(char *lights_buf)
 
 static size_t		get_bulb_light(char *lights_buf)
 {
-	t_new_spherical_light_args		args_light;
-	t_light_commons					commons;
+	t_new_spherical_light_args		args_light; t_light_commons					commons;
 
 	commons.intensity = (t_vec4){{30.0f, 30.0f, 30.0f}};
 	args_light.origin = (t_vec4){{1.0f, 10.0f, 4.0f, 1}};
@@ -276,6 +275,8 @@ void				render_scene1(int parallel_mode)
 	settings.lights_buf_size = buf_size;
 	settings.lights_buf = (char *)ft_memalloc(buf_size);
 	write_lights(settings.lights_buf);
+
+	init_clkit(&clkit, &settings);
 
 	render_scene(&clkit, &settings);
 

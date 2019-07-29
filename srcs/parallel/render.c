@@ -2,7 +2,7 @@
 
 int			render_scene(t_clkit *clkit, t_global_settings *settings)
 {
-	if (init_clkit(clkit, settings) == RT_FAIL)
+	if (update_buffers(clkit, settings) == RT_FAIL)
 		return (RT_FAIL);
 	if (set_kernel_args(*(clkit->kernels), clkit->mems, settings) == RT_FAIL)
 		return (RT_FAIL);

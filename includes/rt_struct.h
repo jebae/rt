@@ -75,13 +75,6 @@ typedef struct				s_plane
 	t_vec4				n;
 }							t_plane;
 
-typedef struct				s_disk
-{
-	t_object_commons	commons;
-	float				r;
-	t_plane				plane;
-}							t_disk;
-
 typedef struct 				s_cone
 {
 	t_object_commons	commons;

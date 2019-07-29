@@ -64,3 +64,22 @@ int					create_buffers(
 		return (RT_FAIL);
 	return (RT_SUCCESS);
 }
+
+int					update_buffers(
+	t_clkit *clkit,
+	t_global_settings *settings
+)
+{
+	t_create_buffer_args		args;
+
+	args.context = clkit->context;
+	if (create_objects_buffer(
+		&(clkit->mems[RT_CL_MEM_OBJECTS]), settings->objects_buf,
+		settings->objects_buf_size, &args) == CLKIT_FAIL)
+		return (RT_FAIL);
+	if (create_lights_buffer(
+		&(clkit->mems[RT_CL_MEM_LIGHTS]), settings->lights_buf,
+		settings->lights_buf_size, &args) == CLKIT_FAIL)
+		return (RT_FAIL);
+	return (RT_SUCCESS);
+}

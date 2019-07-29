@@ -112,43 +112,6 @@ size_t						new_cylinder(
 );
 
 /*
-** shading
-*/
-int							rgb_to_int(t_vec4 rgb_ratio);
-t_vec4						ambient(t_vec4 *i_a, t_vec4 *k_a);
-// void						diffuse_specular(
-// 	t_trace_record *rec,
-// 	// t_light_wrapper *light_wrapper,
-// 	t_vec4 *rgb_shades
-// );
-// t_vec4						ray_color(
-// 	t_trace_record *rec,
-// 	int depth,
-// 	t_global_settings *args
-// );
-// t_ray						get_reflect_ray(t_trace_record *rec);
-// t_vec4						reflection(
-// 	t_trace_record *rec_origin,
-// 	int depth,
-// 	t_global_settings *args
-// );
-// t_vec4						refraction(
-// 	t_trace_record *rec_origin,
-// 	int refract_count,
-// 	t_global_settings *args
-// );
-
-/*
-** shadow
-*/
-// float						get_transmittance(
-// 	t_trace_record *rec,
-// 	t_light_wrapper *light_wrapper,
-// 	t_object_wrapper *object_wrappers,
-// 	int num_objects
-// );
-
-/*
 ** utils
 */
 void						exit_with_memalloc_err(const char *msg);

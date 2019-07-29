@@ -16,6 +16,11 @@ int						create_buffers(
 	t_global_settings *args
 );
 
+int						update_buffers(
+	t_clkit *clkit,
+	t_global_settings *settings
+);
+
 int						init_clkit(
 	t_clkit *clkit,
 	t_global_settings *settings

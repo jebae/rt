@@ -33,7 +33,7 @@ DRAW_PATH = ../draw
 CLKIT_PATH = ../clkit
 
 # compiler options
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 INCLUDES = -I ./$(INCDIR)\
 	-I $(LIBFT_PATH)/includes\
