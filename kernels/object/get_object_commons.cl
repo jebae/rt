@@ -1,4 +1,4 @@
-t_object_commons			get_object_commons(__global char *buf)
+t_object_commons	get_object_commons(__global char *buf)
 {
 	return (*(__global t_object_commons *)(buf + sizeof(int)));
 }

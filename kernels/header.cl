@@ -183,6 +183,7 @@ typedef struct				s_global_settings_args
 	int						window_height;
 	int						num_objects;
 	int						num_lights;
+	int						parallel_mode;
 	size_t					objects_buf_size;
 	size_t					lights_buf_size;
 	t_ray_grid_properties	ray_grid_props;

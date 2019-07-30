@@ -74,6 +74,10 @@ t_vec4						distant_light_direction(void *light, t_vec4 *point);
 /*
 ** object
 */
+size_t						get_object_stride(char *objects_buf);
+
+char						*select_object(char *objects_buf, int index);
+
 void						write_mem_buf(
 	char *buf,
 	char *content,

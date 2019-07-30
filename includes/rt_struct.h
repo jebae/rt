@@ -114,11 +114,12 @@ typedef struct				s_global_settings
 	int						window_height;
 	int						num_objects;
 	int						num_lights;
+	int						parallel_mode;
 	size_t					objects_buf_size;
 	size_t					lights_buf_size;
 	t_ray_grid_properties	ray_grid_props;
 	t_vec4					i_a;
-	int						parallel_mode;
+	t_camera				cam;
 	int						*img_buf;
 	char					*objects_buf;
 	char					*lights_buf;

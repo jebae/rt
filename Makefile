@@ -28,8 +28,6 @@ LIBFT_PATH = ../libft
 
 GMATH_PATH = ../gmath
 
-DRAW_PATH = ../draw
-
 CLKIT_PATH = ../clkit
 
 # compiler options
@@ -38,14 +36,15 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I ./$(INCDIR)\
 	-I $(LIBFT_PATH)/includes\
 	-I $(GMATH_PATH)/includes\
-	-I $(DRAW_PATH)/includes\
 	-I $(CLKIT_PATH)/includes\
 
 # srcs
 SRC_LIGHT = distant_light.c\
 	spherical_light.c\
 
-SRC_OBJECT = cone.c\
+SRC_OBJECT = get_object_stride.c\
+	select_object.c\
+	cone.c\
 	cylinder.c\
 	sphere.c\
 	plane.c\
@@ -81,7 +80,6 @@ HEADERS = $(INCDIR)/rt.h\
 	$(INCDIR)/rt_struct.h\
 	$(LIBFT_PATH)/includes/libft.h\
 	$(GMATH_PATH)/includes/gmath.h\
-	$(DRAW_PATH)/includes/draw.h\
 	$(CLKIT_PATH)/includes/clkit.h\
 
 $(OBJDIR)/%.o : $(SRCDIR)/light/%.c $(HEADERS)

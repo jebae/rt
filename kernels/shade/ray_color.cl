@@ -40,10 +40,12 @@ int			ray_trace(
 		rgb = vec_plus_vec(&rgb, &shade);
 		if (rec->depth >= RT_MAX_DEPTH)
 			continue ;
+	/*
 		if (reflect_record(rec, &new_rec, settings))
 			push_rec_queue(rec_queue, new_rec);
 		if (refract_record(rec, &new_rec, settings))
 			push_rec_queue(rec_queue, new_rec);
+	*/
 	}
 	return (rgb_to_int(&rgb));
 }
