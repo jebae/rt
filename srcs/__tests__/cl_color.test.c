@@ -9,10 +9,12 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 {
 	t_ray_grid_properties	props;
 	t_camera				cam;
+	t_vec4					focus;
 
-	cam.focus = (t_vec4){{0, 3.0, 0, 1}};
+	focus = (t_vec4){{0, 3.0, 0, 1}};
 	cam.pos = (t_vec4){{0, 0.0, 0.0f, 1}};
 	cam.roll = 0;
+	set_camera_axis(&cam, &focus);
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
 }
@@ -97,22 +99,6 @@ static size_t		get_plane(char *objects_buf)
 	args_plane.p = (t_vec4){{0.0f, 0.0f, -1.0f, 1}};
 	return (new_plane(commons, &args_plane, objects_buf));
 }
-
-// static size_t		get_triangle(char *objects_buf)
-// {
-// 	t_new_triangle_args			args_triangle;
-// 	t_object_commons			commons;
-
-// 	commons.ior = 1.5f;
-// 	commons.specular_alpha = 5;
-// 	commons.reflectivity = 0.0f;
-// 	commons.transparency = 0.3f;
-// 	commons.color = (t_vec4){{0.1f, 0.6f, 0.9f, 1}};
-// 	args_triangle.a = (t_vec4){{2.0f, 3.0f, 1.0f, 1.0f}};
-// 	args_triangle.u = (t_vec4){{1.0f, 0.0f, 1.0f, 1.0f}};
-// 	args_triangle.v = (t_vec4){{2.0f, 0.0f, -1.0f, 1.0f}};
-// 	return (new_triangle(commons, &args_triangle, objects_buf));
-// }
 
 static size_t		get_distant_light(char *lights_buf)
 {

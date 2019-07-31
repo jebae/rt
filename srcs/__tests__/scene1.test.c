@@ -9,10 +9,12 @@ static t_ray_grid_properties	get_ray_grid_props_for_test(void)
 {
 	t_ray_grid_properties	props;
 	t_camera				cam;
+	t_vec4					focus;
 
-	cam.focus = (t_vec4){{0.0f, 1.0f, 1.0f, 1}};
+	focus = (t_vec4){{0.0f, 1.0f, 1.0f, 1}};
 	cam.pos = (t_vec4){{0.0f, 0.0f, 1.0f, 1}};
 	cam.roll = 0;
+	set_camera_axis(&cam, &focus);
 	props = get_ray_grid_properties(&cam, WIDTH, HEIGHT, M_PI / 2.0f);
 	return (props);
 }
@@ -233,7 +235,7 @@ static void			write_lights(char *lights_buf)
 	lights_buf += get_distant_light(lights_buf);
 }
 
-void				render_scene1(int parallel_mode)
+void				test_render_scene1(int parallel_mode)
 {
 	t_test_dispatcher		dispatcher;
 	size_t					buf_size;

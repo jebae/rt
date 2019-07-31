@@ -6,10 +6,12 @@ static float		HEIGHT = 800;
 static t_camera		get_cam(void)
 {
 	t_camera	cam;
+	t_vec4		focus;
 
-	cam.focus = (t_vec4){{0, 0, 0, 1}};
+	focus = (t_vec4){{0, 0, 0, 1}};
 	cam.pos = (t_vec4){{1, 1, 1, 1}};
 	cam.roll = 0;
+	set_camera_axis(&cam, &focus);
 	return (cam);
 }
 
@@ -27,7 +29,7 @@ static void			render_ray_direction(
 
 	init_mlx(&dispatcher, WIDTH, HEIGHT);
 	init_marker(&(dispatcher.marker), dispatcher.p_mlx, dispatcher.p_win, &settings);
-	mat = camera_mat(cam);
+	mat = world_to_cam_coord_mat(cam);
 	dispatcher.marker.color = 0xFFFFFF;
 	for (int i=0; i <= HEIGHT; i += 100)
 	{

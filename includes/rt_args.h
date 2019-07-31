@@ -10,9 +10,6 @@ typedef struct				s_set_ray_grid_properties_args
 	float		width;
 	float		height;
 	float		aov;
-	t_vec4		x;
-	t_vec4		y;
-	t_vec4		z;
 }							t_set_ray_grid_properties_args;
 
 typedef struct				s_new_sphere_args
