@@ -75,6 +75,7 @@ OBJS += $(addprefix $(OBJDIR)/, $(SRC_PARALLEL:.c=.o))
 
 # compile objs
 HEADERS = $(INCDIR)/rt.h\
+	$(INCDIR)/rt_func.h\
 	$(INCDIR)/rt_args.h\
 	$(INCDIR)/rt_parallel.h\
 	$(INCDIR)/rt_struct.h\

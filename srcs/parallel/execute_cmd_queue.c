@@ -1,4 +1,4 @@
-#include "rt_parallel.h"
+#include "rt.h"
 
 int			execute_cmd_queue(cl_command_queue cmd_queue)
 {

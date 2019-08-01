@@ -1,4 +1,4 @@
-#include "rt_parallel.h"
+#include "rt.h"
 
 int			enqueue_ndrange_kernel(
 	cl_command_queue cmd_queue,

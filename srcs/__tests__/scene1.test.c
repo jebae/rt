@@ -1,5 +1,5 @@
 #include "rt_test.h"
-#include "rt_parallel.h"
+#include "rt.h"
 
 static float		WIDTH = 1600;
 static float		HEIGHT = 1200;

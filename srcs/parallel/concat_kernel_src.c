@@ -1,4 +1,4 @@
-#include "rt_parallel.h"
+#include "rt.h"
 
 static void		push_parts(
 	char kernel_srcs_buf[][50],

@@ -2,7 +2,6 @@
 # define RT_TEST_H
 
 # include "rt.h"
-# include "rt_parallel.h"
 # include "draw.h"
 # include <mlx.h>
 # include <stdio.h>

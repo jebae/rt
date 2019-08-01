@@ -2,8 +2,7 @@
 # define RT_PARALLEL_H
 
 # include "clkit.h"
-# include "rt.h"
-# include <stdio.h> // remove after
+# include "rt_struct.h"
 
 # define RT_NUM_CL_KERNELS				1
 # define RT_NUM_CL_MEMS					3

@@ -1,4 +1,4 @@
-#include "rt_parallel.h"
+#include "rt.h"
 
 int			set_kernel_args(
 	cl_kernel kernel,

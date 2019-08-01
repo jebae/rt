@@ -1,4 +1,4 @@
-#include "rt_parallel.h"
+#include "rt.h"
 
 int			render_scene(t_clkit *clkit, t_global_settings *settings)
 {

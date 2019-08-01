@@ -1,4 +1,4 @@
-#include "rt_parallel.h"
+#include "rt.h"
 
 static int			create_image_buffer(
 	cl_mem *mem,
