@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_test.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/01 17:07:07 by jebae             #+#    #+#             */
+/*   Updated: 2019/08/01 17:10:00 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_TEST_H
 # define RT_TEST_H
 
@@ -36,7 +48,7 @@ void				init_marker(
 	t_global_settings *settings
 );
 
-char        		*get_img_buffer(void *p_img, int width);
+char				*get_img_buffer(void *p_img, int width);
 
 /*
 ** tests
@@ -45,6 +57,5 @@ void				test_ray_direction(void);
 void				test_cl_intersect(int parallel_mode);
 void				test_cl_color(int parallel_mode);
 void				test_render_scene1(int parallel_mode);
-
 
 #endif

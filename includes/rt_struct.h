@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_struct.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/01 17:07:02 by jebae             #+#    #+#             */
+/*   Updated: 2019/08/01 17:09:30 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_STRUCT_H
 # define RT_STRUCT_H
 
@@ -75,7 +87,7 @@ typedef struct				s_plane
 	t_vec4				n;
 }							t_plane;
 
-typedef struct 				s_cone
+typedef struct				s_cone
 {
 	t_object_commons	commons;
 	float				theta;
@@ -92,7 +104,7 @@ typedef struct				s_cone_intersect_coefficients
 	float				c;
 }							t_cone_intersect_coefficients;
 
-typedef struct 				s_cylinder
+typedef struct				s_cylinder
 {
 	t_object_commons	commons;
 	float				r;
@@ -124,6 +136,5 @@ typedef struct				s_global_settings
 	char					*objects_buf;
 	char					*lights_buf;
 }							t_global_settings;
-
 
 #endif

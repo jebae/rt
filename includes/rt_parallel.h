@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_parallel.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/01 17:06:58 by jebae             #+#    #+#             */
+/*   Updated: 2019/08/01 17:07:30 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_PARALLEL_H
 # define RT_PARALLEL_H
 
@@ -50,6 +62,9 @@ int						release(t_clkit *clkit);
 
 char					*concat_kernel_src(void);
 
-int						render_scene(t_clkit *clkit, t_global_settings *settings);
+int						render_scene(
+	t_clkit *clkit,
+	t_global_settings *settings
+);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_args.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/01 17:06:53 by jebae             #+#    #+#             */
+/*   Updated: 2019/08/01 17:08:24 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_ARGS_H
 # define RT_ARGS_H
 
@@ -38,7 +50,7 @@ typedef struct				s_new_disk_args
 	t_vec4		n;
 }							t_new_disk_args;
 
-typedef struct 				s_new_cone_args
+typedef struct				s_new_cone_args
 {
 	float		theta;
 	float		h;
@@ -46,7 +58,7 @@ typedef struct 				s_new_cone_args
 	t_vec4		v;
 }							t_new_cone_args;
 
-typedef struct 				s_new_cylinder_args
+typedef struct				s_new_cylinder_args
 {
 	float		r;
 	float		h;
