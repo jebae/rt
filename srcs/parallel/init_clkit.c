@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_clkit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/01 17:01:44 by jebae             #+#    #+#             */
+/*   Updated: 2019/08/01 17:05:13 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 static int			handle_fail(char *src)
@@ -10,7 +22,8 @@ static int			create_kernels(t_clkit *clkit, char *kernel_name)
 {
 	if ((clkit->kernels = (cl_kernel *)ft_memalloc(sizeof(cl_kernel))) == NULL)
 		exit_with_memalloc_err("kernels");
-	if (clk_create_kernel(clkit->kernels, clkit->program, kernel_name) == CLKIT_FAIL)
+	if (clk_create_kernel(
+		clkit->kernels, clkit->program, kernel_name) == CLKIT_FAIL)
 		return (RT_FAIL);
 	return (RT_SUCCESS);
 }

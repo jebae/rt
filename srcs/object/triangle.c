@@ -1,42 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   triangle.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/01 17:01:20 by jebae             #+#    #+#             */
+/*   Updated: 2019/08/01 17:01:20 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
-
-// static t_vec4		triangle_normal(
-// 	void *object,
-// 	t_vec4 *point
-// )
-// {
-// 	point = NULL;
-// 	return (((t_triangle *)object)->n);
-// }
-
-// static int			triangle_intersect(
-// 	void *object,
-// 	t_ray *ray,
-// 	float *t
-// )
-// {
-// 	int				solution_found;
-// 	t_triangle		*triangle;
-// 	t_mat4			mat;
-// 	t_vec4			v;
-
-// 	triangle = (t_triangle *)object;
-// 	ft_memcpy(mat.arr[0], &(triangle->u), sizeof(t_vec4));
-// 	ft_memcpy(mat.arr[1], &(triangle->v), sizeof(t_vec4));
-// 	ft_memcpy(mat.arr[2], &(ray->d), sizeof(t_vec4));
-// 	mat = mat_transpose(&mat);
-// 	v = vec_sub_vec(&(triangle->a), &(ray->e));
-// 	v = mat3_cramer_solution(&mat, &v, &solution_found);
-// 	if (solution_found == GMATH_FALSE)
-// 		return (RT_FALSE);
-// 	if (v.arr[0] >= 0.0f && v.arr[1] >= 0.0f &&\
-// 		v.arr[0] + v.arr[1] <= 1.0f && v.arr[2] >= 0.0f)
-// 	{
-// 		*t = v.arr[2];
-// 		return (RT_TRUE);
-// 	}
-// 	return (RT_FALSE);
-// }
 
 size_t		new_triangle(
 	t_object_commons commons,
