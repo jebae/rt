@@ -1,29 +1,17 @@
 float			get_ior(t_trace_record *rec)
 {
-	int					refract_count;
-	t_ray				*recent_enter_ray;
 	t_trace_record		*cur;
-	t_trace_record		*prev;
 
-	refract_count = 0;
-	recent_enter_ray = NULL;
-	cur = rec;
-	prev = rec->prev;
-	while (prev != NULL)
+	cur = rec->prev;
+	while (cur != NULL)
 	{
-		if (cur->ray.type == RT_RAY_TYPE_REFRACTION &&
-			prev->objects_buf == rec->objects_buf)
-		{
-			if (recent_enter_ray == NULL)
-				recent_enter_ray = &(cur->ray);
-			refract_count++;
-		}
-		cur = prev;
-		prev = prev->prev;
+		if (cur->objects_buf == rec->objects_buf &&
+			(cur->ray.type == RT_RAY_TYPE_REFRACTION ||
+			cur->ray.type == RT_RAY_TYPE_ORIGIN))
+			return (cur->ray.ior_medium);
+		cur = cur->prev;
 	}
-	if (refract_count % 2 == 0)
-		return (get_object_ior(rec->objects_buf));
-	return (recent_enter_ray->ior_medium);
+	return (get_object_ior(rec->objects_buf));
 }
 
 t_ray	get_refract_ray(t_trace_record *rec)
@@ -62,6 +50,8 @@ int					refract_record(
 	t_object_commons	commons;
 
 	ray = get_refract_ray(prev);
+	if (ray.type == RT_RAY_TYPE_NONE)
+		return (RT_FALSE);
 	if (trace(ray, prev, cur, settings))
 	{
 		commons = get_object_commons(prev->objects_buf);

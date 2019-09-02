@@ -14,5 +14,6 @@ t_ray		ray_origin(
 	d = vec_plus_vec(&d, &v);
 	ray.d = normalize_vec(&d);
 	ray.e = props->e;
+	ray.type = RT_RAY_TYPE_ORIGIN;
 	return (ray);
 }

@@ -158,9 +158,9 @@ static size_t		get_ball(char *objects_buf)
 	t_new_sphere_args			args_sphere;
 	t_object_commons			commons;
 
-	commons.specular_alpha = 1;
+	commons.specular_alpha = 50;
 	commons.reflectivity = 0.1f;
-	commons.transparency = 0.1f;
+	commons.transparency = 0.9f;
 	commons.ior = 1.5f;
 	commons.color = (t_vec4){{0.9f, 0.2f, 0.1f, 1}};
 	args_sphere.r = 1.0f;
@@ -174,8 +174,8 @@ static size_t		get_fanta(char *objects_buf)
 	t_object_commons			commons;
 
 	commons.specular_alpha = 50;
-	commons.reflectivity = 0.2f;
-	commons.transparency = 0.0f;
+	commons.reflectivity = 0.1f;
+	commons.transparency = 0.9f;
 	commons.ior = 1.5f;
 	commons.color = (t_vec4){{1.0f, 0.4f, 0.0f, 1}};
 	args_cylinder.r = 0.7f;
