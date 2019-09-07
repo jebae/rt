@@ -18,6 +18,10 @@ t_vec4		ray_color(
 	commons = get_object_commons(rec->objects_buf);
 	a = ambient(&(settings->i_a), &(commons.color));
 	ds = diffuse_specular_per_light(rec, &commons, settings);
+	ds = scalar_mul_vec(
+		(1.0f - commons.reflectivity) * (1.0f - commons.transparency),
+		&ds
+	);
 	return (vec_plus_vec(&a, &ds));
 }
 
