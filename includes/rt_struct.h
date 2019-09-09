@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:07:02 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:09:30 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 15:59:43 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct				s_cylinder_intersect_coefficients
 	float		c;
 }							t_cylinder_intersect_coefficients;
 
-typedef struct				s_global_settings
+typedef struct				s_rt_settings
 {
 	int						window_width;
 	int						window_height;
@@ -135,6 +135,6 @@ typedef struct				s_global_settings
 	int						*img_buf;
 	char					*objects_buf;
 	char					*lights_buf;
-}							t_global_settings;
+}							t_rt_settings;
 
 #endif

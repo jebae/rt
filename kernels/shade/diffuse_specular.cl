@@ -63,7 +63,7 @@ t_vec4				diffuse_specular(
 t_vec4			diffuse_specular_per_light(
 	t_trace_record *rec,
 	t_object_commons *obj_commons,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	int				i;

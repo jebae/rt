@@ -43,7 +43,7 @@ t_ray	get_refract_ray(t_trace_record *rec)
 int					refract_record(
 	t_trace_record *prev,
 	t_trace_record *cur,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	t_ray				ray;

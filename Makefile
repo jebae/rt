@@ -6,7 +6,7 @@
 #    By: jebae <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/01 17:02:27 by jebae             #+#    #+#              #
-#    Updated: 2019/08/01 17:02:28 by jebae            ###   ########.fr        #
+#    Updated: 2019/09/09 17:50:00 by jebae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,25 +65,28 @@ SRC_OBJECT = get_object_stride.c\
 SRC_RAY = ray_grid_properties.c\
 	set_ray.c\
 
-SRC_UTILS = global_settings.c\
-	handle_error.c\
+SRC_RT_SETTINGS = init_settings.c\
+	clear_settings.c\
 
-SRC_PARALLEL = create_buffer.c\
+SRC_PARALLEL = buffer.c\
 	execute_cmd_queue.c\
 	release.c\
-	write_mem_buf.c\
 	enqueue.c\
 	init_clkit.c\
 	set_kernel_args.c\
 	concat_kernel_src.c\
 	render.c\
+	write_mem_buf.c\
+
+SRC_HANDLE_ERROR = handle_error.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_LIGHT:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_OBJECT:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_RAY:.c=.o))
-OBJS += $(addprefix $(OBJDIR)/, $(SRC_UTILS:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_RT_SETTINGS:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_PARALLEL:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_HANDLE_ERROR:.c=.o))
 
 # compile objs
 HEADERS = $(INCDIR)/rt.h\
@@ -101,9 +104,11 @@ $(OBJDIR)/%.o : $(SRCDIR)/object/%.c $(HEADERS)
 	@$(call compile_obj,$<,$@)
 $(OBJDIR)/%.o : $(SRCDIR)/ray/%.c $(HEADERS)
 	@$(call compile_obj,$<,$@)
-$(OBJDIR)/%.o : $(SRCDIR)/utils/%.c $(HEADERS)
+$(OBJDIR)/%.o : $(SRCDIR)/rt_settings/%.c $(HEADERS)
 	@$(call compile_obj,$<,$@)
 $(OBJDIR)/%.o : $(SRCDIR)/parallel/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/handle_error/%.c $(HEADERS)
 	@$(call compile_obj,$<,$@)
 
 # build

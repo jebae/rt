@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:01:29 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:01:30 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 16:23:28 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		push_part_utils(char kernel_srcs_buf[][50])
 		"kernels/data_structure/trace_record_queue.cl",
 		"kernels/gmath/vec4/vec4_operator.cl",
 		"kernels/gmath/mat4/mat4_operator.cl",
-		"kernels/preprocess/get_global_settings.cl",
+		"kernels/preprocess/get_rt_settings.cl",
 		"kernels/utils/swap.cl",
 	};
 

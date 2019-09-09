@@ -6,13 +6,13 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:01:50 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:01:51 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 16:25:05 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			render_scene(t_clkit *clkit, t_global_settings *settings)
+int			render_scene(t_clkit *clkit, t_rt_settings *settings)
 {
 	if (update_buffers(clkit, settings) == RT_FAIL)
 		return (RT_FAIL);

@@ -169,16 +169,16 @@ typedef struct				s_trace_record_queue
 	t_trace_record			queue[RT_MAX_RECORD];
 }							t_trace_record_queue;
 
-typedef struct				s_global_settings
+typedef struct				s_rt_settings
 {
 	int					num_objects;
 	int					num_lights;
 	t_vec4				i_a;
 	__global char		*objects_buf;
 	__global char		*lights_buf;
-}							t_global_settings;
+}							t_rt_settings;
 
-typedef struct				s_global_settings_args
+typedef struct				s_rt_settings_args
 {
 	int						window_width;
 	int						window_height;
@@ -189,7 +189,7 @@ typedef struct				s_global_settings_args
 	size_t					lights_buf_size;
 	t_ray_grid_properties	ray_grid_props;
 	t_vec4					i_a;
-}							t_global_settings_args;
+}							t_rt_settings_args;
 
 /*
 ** gmath
@@ -215,7 +215,7 @@ t_vec4						mat3_cramer_solution(
 /*
 ** preprocess
 */
-t_global_settings			get_global_settings(
+t_rt_settings			get_rt_settings(
 	__global char *objects_buf,
 	__global char *lights_buf,
 	int num_objects,
@@ -240,7 +240,7 @@ int							trace(
 	t_ray ray,
 	t_trace_record *prev_rec,
 	t_trace_record *rec,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 /*
@@ -385,18 +385,18 @@ int									rgb_to_int(t_vec4 *rgb_ratio);
 
 int									ray_trace(
 	t_trace_record_queue *rec_queue,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 t_vec4								ray_color(
 	t_trace_record *rec,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 t_vec4								diffuse_specular_per_light(
 	t_trace_record *rec,
 	t_object_commons *obj_commons,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 t_vec4								diffuse_specular(
@@ -423,7 +423,7 @@ t_ray								get_reflect_ray(t_trace_record *rec);
 int									reflect_record(
 	t_trace_record *prev,
 	t_trace_record *cur,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 float								get_ior(t_trace_record *rec);
@@ -433,7 +433,7 @@ t_ray								get_refract_ray(t_trace_record *rec);
 int									refract_record(
 	t_trace_record *prev,
 	t_trace_record *cur,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 /*

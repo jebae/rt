@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:01:38 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:01:38 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 16:13:17 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			enqueue_read_buffer(
 	cl_command_queue cmd_queue,
 	cl_mem mem,
 	int *host_buf,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	t_enqueue_buffer_args		args;

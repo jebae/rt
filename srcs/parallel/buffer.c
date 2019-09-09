@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   create_buffer.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/01 17:01:35 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:01:36 by jebae            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rt.h"
 
 static int			create_image_buffer(
@@ -53,15 +41,15 @@ static int			create_lights_buffer(
 
 int					create_buffers(
 	t_clkit *clkit,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	t_create_buffer_args		args;
 
 	args.context = clkit->context;
-	clkit->mems = (cl_mem *)ft_memalloc(sizeof(cl_mem) * RT_NUM_CL_MEMS);
+	clkit->mems = (cl_mem *)ft_memalloc(sizeof(cl_mem) * clkit->num_mems);
 	if (clkit->mems == NULL)
-		exit_with_memalloc_err("cl mem objects");
+		return (rt_print_memalloc_err("clkit mems"));
 	if (create_image_buffer(
 		&(clkit->mems[RT_CL_MEM_IMAGE]), settings->window_width,
 		settings->window_height, &args) == CLKIT_FAIL)
@@ -79,7 +67,7 @@ int					create_buffers(
 
 int					update_buffers(
 	t_clkit *clkit,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	t_create_buffer_args		args;

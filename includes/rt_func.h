@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:06:55 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:06:56 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 17:50:49 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 # include "rt_struct.h"
 # include "rt_args.h"
 
-typedef enum				e_rgb_shades_idx
-{
-	AMBIENT,
-	DIFFUSE,
-	SPECULAR,
-	REFLECT,
-	REFRACT,
-}							t_rgb_shades_idx;
-
 /*
 ** ray
 */
@@ -35,13 +26,13 @@ t_ray_grid_properties		get_ray_grid_properties(
 	float height,
 	float aov
 );
+
 void						set_ray(
 	t_ray_grid_properties *props,
 	t_ray *ray,
 	int scalar_x,
 	int scalar_y
 );
-t_vec4						hit_point(t_ray *ray, float t);
 
 /*
 ** light
@@ -57,8 +48,6 @@ size_t						new_spherical_light(
 	t_new_spherical_light_args *args_light,
 	char *lights_buf
 );
-
-t_vec4						distant_light_direction(void *light, t_vec4 *point);
 
 /*
 ** object
@@ -105,10 +94,20 @@ size_t						new_cylinder(
 );
 
 /*
-** utils
+** rt_settings
 */
-void						exit_with_memalloc_err(const char *msg);
+void						init_rt_settings(
+	t_rt_settings *settings,
+	t_init_rt_settings_args *args
+);
 
-void						clear_global_settings(t_global_settings *settings);
+void						clear_rt_settings(t_rt_settings *settings);
+
+/*
+** handle error
+*/
+int		rt_print_err(const char *msg);
+
+int		rt_print_memalloc_err(const char *target);
 
 #endif

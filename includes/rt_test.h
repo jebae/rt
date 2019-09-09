@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:07:07 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:10:00 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 16:26:32 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				init_marker(
 	t_marker *marker,
 	void *p_mlx,
 	void *p_win,
-	t_global_settings *settings
+	t_rt_settings *settings
 );
 
 char				*get_img_buffer(void *p_img, int width);

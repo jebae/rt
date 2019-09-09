@@ -240,7 +240,7 @@ void				test_render_scene1(int parallel_mode)
 	t_test_dispatcher		dispatcher;
 	size_t					buf_size;
 	t_clkit					clkit;
-	t_global_settings		settings;
+	t_rt_settings		settings;
 
 	settings.parallel_mode = parallel_mode;
 	settings.window_width = WIDTH;
@@ -282,8 +282,8 @@ void				test_render_scene1(int parallel_mode)
 
 	render_scene(&clkit, &settings);
 
-	release(&clkit);
-	clear_global_settings(&settings);
+	release_clkit(&clkit);
+	clear_rt_settings(&settings);
 
 	mlx_put_image_to_window(
 		dispatcher.marker.p_mlx,

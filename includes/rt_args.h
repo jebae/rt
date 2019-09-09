@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 17:06:53 by jebae             #+#    #+#             */
-/*   Updated: 2019/08/01 17:08:24 by jebae            ###   ########.fr       */
+/*   Updated: 2019/09/09 16:06:40 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct				s_new_spherical_light_args
 	t_vec4		origin;
 }							t_new_spherical_light_args;
 
-typedef struct				s_global_settings_args
+typedef struct				s_rt_settings_args
 {
 	int						window_width;
 	int						window_height;
@@ -86,6 +86,15 @@ typedef struct				s_global_settings_args
 	size_t					lights_buf_size;
 	t_ray_grid_properties	ray_grid_props;
 	t_vec4					i_a;
-}							t_global_settings_args;
+}							t_rt_settings_args;
+
+typedef struct				s_init_rt_settings_args
+{
+	int			width;
+	int			height;
+	int			parallel_mode;
+	t_vec4		i_a;
+	int			*img_buf;
+}							t_init_rt_settings_args;
 
 #endif

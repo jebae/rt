@@ -12,7 +12,7 @@ void		init_marker(
 	t_marker *marker,
 	void *p_mlx,
 	void *p_win,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	marker->p_mlx = p_mlx;

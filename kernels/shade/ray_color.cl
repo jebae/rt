@@ -8,7 +8,7 @@ void		init_rgb_color(t_vec4 *rgb)
 
 t_vec4		ray_color(
 	t_trace_record *rec,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	t_object_commons		commons;
@@ -27,7 +27,7 @@ t_vec4		ray_color(
 
 int			ray_trace(
 	t_trace_record_queue *rec_queue,
-	t_global_settings *settings
+	t_rt_settings *settings
 )
 {
 	t_vec4				rgb;

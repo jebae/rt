@@ -21,7 +21,7 @@ static void			render_ray_direction(
 )
 {
 	t_test_dispatcher	dispatcher;
-	t_global_settings	settings;
+	t_rt_settings		settings;
 	t_coord				p1;
 	t_coord				p2;
 	t_mat4				mat;
