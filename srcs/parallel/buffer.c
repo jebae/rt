@@ -54,11 +54,11 @@ int					create_buffers(
 		&(clkit->mems[RT_CL_MEM_IMAGE]), settings->window_width,
 		settings->window_height, &args) == CLKIT_FAIL)
 		return (RT_FAIL);
-	if (create_objects_buffer(
+	if (settings->objects_buf_size && create_objects_buffer(
 		&(clkit->mems[RT_CL_MEM_OBJECTS]), settings->objects_buf,
 		settings->objects_buf_size, &args) == CLKIT_FAIL)
 		return (RT_FAIL);
-	if (create_lights_buffer(
+	if (settings->lights_buf_size && create_lights_buffer(
 		&(clkit->mems[RT_CL_MEM_LIGHTS]), settings->lights_buf,
 		settings->lights_buf_size, &args) == CLKIT_FAIL)
 		return (RT_FAIL);
@@ -73,11 +73,11 @@ int					update_buffers(
 	t_create_buffer_args		args;
 
 	args.context = clkit->context;
-	if (create_objects_buffer(
+	if (settings->objects_buf_size && create_objects_buffer(
 		&(clkit->mems[RT_CL_MEM_OBJECTS]), settings->objects_buf,
 		settings->objects_buf_size, &args) == CLKIT_FAIL)
 		return (RT_FAIL);
-	if (create_lights_buffer(
+	if (settings->lights_buf_size && create_lights_buffer(
 		&(clkit->mems[RT_CL_MEM_LIGHTS]), settings->lights_buf,
 		settings->lights_buf_size, &args) == CLKIT_FAIL)
 		return (RT_FAIL);
