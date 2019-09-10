@@ -278,9 +278,8 @@ void				test_render_scene1(int parallel_mode)
 	settings.lights_buf = (char *)ft_memalloc(buf_size);
 	write_lights(settings.lights_buf);
 
-	init_clkit(&clkit, &settings);
-
-	render_scene(&clkit, &settings);
+	if (init_clkit(&clkit, &settings) == RT_SUCCESS)
+		render_scene(&clkit, &settings);
 
 	release_clkit(&clkit);
 	clear_rt_settings(&settings);

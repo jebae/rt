@@ -185,16 +185,16 @@ void						test_cl_color(int parallel_mode)
 	if (init_clkit(&clkit, &settings) == RT_FAIL)
 		return ;
 
-	if (set_kernel_args(*(clkit.kernels), clkit.mems, &settings) == RT_FAIL)
+	if (set_kernel_args(clkit.kernels, clkit.mems, &settings) == RT_FAIL)
 		return ;
 
-	enqueue_ndrange_kernel(*(clkit.cmd_queues), *(clkit.kernels),
+	enqueue_ndrange_kernel(clkit.cmd_queues, clkit.kernels,
 		settings.window_width * settings.window_height);
 
-	enqueue_read_buffer(*(clkit.cmd_queues),
-		clkit.mems[RT_CL_MEM_IMAGE], settings.img_buf, &settings);
+	enqueue_read_buffer(clkit.cmd_queues,
+		&(clkit.mems[RT_CL_MEM_IMAGE]), settings.img_buf, &settings);
 
-	execute_cmd_queue(*(clkit.cmd_queues));
+	execute_cmd_queue(clkit.cmd_queues);
 
 	release_clkit(&clkit);
 	clear_rt_settings(&settings);

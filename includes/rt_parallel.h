@@ -38,25 +38,25 @@ int						init_clkit(
 );
 
 int						set_kernel_args(
-	cl_kernel kernel,
-	cl_mem *mems,
+	t_clk_kernel *kernel,
+	t_clk_mem *mems,
 	t_rt_settings *settings
 );
 
 int						enqueue_ndrange_kernel(
-	cl_command_queue cmd_queue,
-	cl_kernel kernel,
+	t_clk_cmd_queue *cmd_queue,
+	t_clk_kernel *kernel,
 	size_t work_size
 );
 
 int						enqueue_read_buffer(
-	cl_command_queue cmd_queue,
-	cl_mem mem,
+	t_clk_cmd_queue *cmd_queue,
+	t_clk_mem *mem,
 	int *host_buf,
 	t_rt_settings *settings
 );
 
-int						execute_cmd_queue(cl_command_queue cmd_queue);
+int						execute_cmd_queue(t_clk_cmd_queue *cmd_queue);
 
 void					release_clkit(t_clkit *clkit);
 

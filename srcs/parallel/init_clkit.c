@@ -9,10 +9,11 @@ static int			handle_fail(char *src)
 
 static int			create_kernels(t_clkit *clkit, char *kernel_name)
 {
-	if ((clkit->kernels = (cl_kernel *)ft_memalloc(sizeof(cl_kernel))) == NULL)
+	clkit->kernels = clk_new_kernels(clkit->num_kernels);
+	if (clkit->kernels == NULL)
 		return (rt_print_memalloc_err("clkit kernels"));
 	if (clk_create_kernel(
-		clkit->kernels, clkit->program, kernel_name) == CLKIT_FAIL)
+		clkit->kernels, &(clkit->program), kernel_name) == CLKIT_FAIL)
 		return (RT_FAIL);
 	return (RT_SUCCESS);
 }
@@ -25,9 +26,9 @@ static int			build_kernel(t_clkit *clkit)
 	if (src == NULL)
 		return (rt_print_memalloc_err("kernel src"));
 	if (clk_create_program(&(clkit->program),
-		clkit->context, src) == CLKIT_FAIL)
+		&(clkit->context), src) == CLKIT_FAIL)
 		return (handle_fail(src));
-	if (clk_build_program(clkit->program,
+	if (clk_build_program(&(clkit->program),
 		&(clkit->devices[0])) == CLKIT_FAIL)
 		return (handle_fail(src));
 	if (create_kernels(clkit, "render") == RT_FAIL)

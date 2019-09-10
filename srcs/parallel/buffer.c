@@ -1,7 +1,7 @@
 #include "rt.h"
 
 static int			create_image_buffer(
-	cl_mem *mem,
+	t_clk_mem *mem,
 	int width,
 	int height,
 	t_create_buffer_args *args
@@ -14,7 +14,7 @@ static int			create_image_buffer(
 }
 
 static int			create_objects_buffer(
-	cl_mem *mem,
+	t_clk_mem *mem,
 	char *objects_buf,
 	size_t size,
 	t_create_buffer_args *args
@@ -27,7 +27,7 @@ static int			create_objects_buffer(
 }
 
 static int			create_lights_buffer(
-	cl_mem *mem,
+	t_clk_mem *mem,
 	char *lights_buf,
 	size_t size,
 	t_create_buffer_args *args
@@ -46,8 +46,8 @@ int					create_buffers(
 {
 	t_create_buffer_args		args;
 
-	args.context = clkit->context;
-	clkit->mems = (cl_mem *)ft_memalloc(sizeof(cl_mem) * clkit->num_mems);
+	args.context = &(clkit->context);
+	clkit->mems = clk_new_mems(clkit->num_mems);
 	if (clkit->mems == NULL)
 		return (rt_print_memalloc_err("clkit mems"));
 	if (create_image_buffer(
@@ -72,7 +72,7 @@ int					update_buffers(
 {
 	t_create_buffer_args		args;
 
-	args.context = clkit->context;
+	args.context = &(clkit->context);
 	if (settings->objects_buf_size && create_objects_buffer(
 		&(clkit->mems[RT_CL_MEM_OBJECTS]), settings->objects_buf,
 		settings->objects_buf_size, &args) == CLKIT_FAIL)
